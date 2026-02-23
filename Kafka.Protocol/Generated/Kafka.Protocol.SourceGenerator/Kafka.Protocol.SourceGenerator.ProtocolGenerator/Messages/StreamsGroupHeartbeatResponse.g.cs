@@ -295,11 +295,10 @@ namespace Kafka.Protocol
             return this;
         }
 
-        private NullableArray<Status> _statusCollection = new NullableArray<Status>(null);
+        private NullableArray<Status> _statusCollection = Array.Empty<Status>();
         /// <summary>
-        /// <para>Indicate zero or more status for the group.  Null if unchanged since last heartbeat.</para>
+        /// <para>Indicate zero or more status for the group.</para>
         /// <para>Versions: 0+</para>
-        /// <para>Default: null</para>
         /// </summary>
         public Array<Status>? StatusCollection
         {
@@ -311,9 +310,8 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>Indicate zero or more status for the group.  Null if unchanged since last heartbeat.</para>
+        /// <para>Indicate zero or more status for the group.</para>
         /// <para>Versions: 0+</para>
-        /// <para>Default: null</para>
         /// </summary>
         public StreamsGroupHeartbeatResponse WithStatusCollection(Array<Status>? statusCollection)
         {

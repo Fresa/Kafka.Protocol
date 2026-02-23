@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public ShareAcknowledgeResponse(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"ShareAcknowledgeResponse does not support version {version}. Valid versions are: 1");
+                throw new UnsupportedVersionException($"ShareAcknowledgeResponse does not support version {version}. Valid versions are: 1-2");
             Version = version;
             IsFlexibleVersion = true;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(79);
         public static readonly Int16 MinVersion = Int16.From(1);
-        public static readonly Int16 MaxVersion = Int16.From(1);
+        public static readonly Int16 MaxVersion = Int16.From(2);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -45,13 +45,15 @@ namespace Kafka.Protocol
             return new Tags.TagSection();
         }
 
-        internal override int GetSize() => _throttleTimeMs.GetSize(IsFlexibleVersion) + _errorCode.GetSize(IsFlexibleVersion) + _errorMessage.GetSize(IsFlexibleVersion) + _responsesCollection.GetSize(IsFlexibleVersion) + _nodeEndpointsCollection.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+        internal override int GetSize() => _throttleTimeMs.GetSize(IsFlexibleVersion) + _errorCode.GetSize(IsFlexibleVersion) + _errorMessage.GetSize(IsFlexibleVersion) + (Version >= 2 ? _acquisitionLockTimeoutMs.GetSize(IsFlexibleVersion) : 0) + _responsesCollection.GetSize(IsFlexibleVersion) + _nodeEndpointsCollection.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
         internal static async ValueTask<ShareAcknowledgeResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
         {
             var instance = new ShareAcknowledgeResponse(version);
             instance.ThrottleTimeMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             instance.ErrorMessage = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (instance.Version >= 2)
+                instance.AcquisitionLockTimeoutMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             instance.ResponsesCollection = await Map<Uuid, ShareAcknowledgeTopicResponse>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => ShareAcknowledgeTopicResponse.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.TopicId, cancellationToken).ConfigureAwait(false);
             instance.NodeEndpointsCollection = await Map<Int32, NodeEndpoint>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => NodeEndpoint.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.NodeId, cancellationToken).ConfigureAwait(false);
             if (instance.IsFlexibleVersion)
@@ -75,6 +77,8 @@ namespace Kafka.Protocol
             await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (Version >= 2)
+                await _acquisitionLockTimeoutMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _responsesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _nodeEndpointsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (IsFlexibleVersion)
@@ -154,6 +158,30 @@ namespace Kafka.Protocol
         public ShareAcknowledgeResponse WithErrorMessage(String? errorMessage)
         {
             ErrorMessage = errorMessage;
+            return this;
+        }
+
+        private Int32 _acquisitionLockTimeoutMs = Int32.Default;
+        /// <summary>
+        /// <para>The time in milliseconds for which the acquired records are locked.</para>
+        /// <para>Versions: 2+</para>
+        /// </summary>
+        public Int32 AcquisitionLockTimeoutMs
+        {
+            get => _acquisitionLockTimeoutMs;
+            private set
+            {
+                _acquisitionLockTimeoutMs = value;
+            }
+        }
+
+        /// <summary>
+        /// <para>The time in milliseconds for which the acquired records are locked.</para>
+        /// <para>Versions: 2+</para>
+        /// </summary>
+        public ShareAcknowledgeResponse WithAcquisitionLockTimeoutMs(Int32 acquisitionLockTimeoutMs)
+        {
+            AcquisitionLockTimeoutMs = acquisitionLockTimeoutMs;
             return this;
         }
 

@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public ReadShareGroupStateSummaryResponse(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"ReadShareGroupStateSummaryResponse does not support version {version}. Valid versions are: 0");
+                throw new UnsupportedVersionException($"ReadShareGroupStateSummaryResponse does not support version {version}. Valid versions are: 0-1");
             Version = version;
             IsFlexibleVersion = true;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(87);
         public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(0);
+        public static readonly Int16 MaxVersion = Int16.From(1);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -236,7 +236,7 @@ namespace Kafka.Protocol
                 }
 
                 int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
-                internal int GetSize(bool _) => _partition.GetSize(IsFlexibleVersion) + _errorCode.GetSize(IsFlexibleVersion) + _errorMessage.GetSize(IsFlexibleVersion) + _stateEpoch.GetSize(IsFlexibleVersion) + _leaderEpoch.GetSize(IsFlexibleVersion) + _startOffset.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+                internal int GetSize(bool _) => _partition.GetSize(IsFlexibleVersion) + _errorCode.GetSize(IsFlexibleVersion) + _errorMessage.GetSize(IsFlexibleVersion) + _stateEpoch.GetSize(IsFlexibleVersion) + _leaderEpoch.GetSize(IsFlexibleVersion) + _startOffset.GetSize(IsFlexibleVersion) + (Version >= 1 ? _deliveryCompleteCount.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
                 internal static async ValueTask<PartitionResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
                 {
                     var instance = new PartitionResult(version);
@@ -246,6 +246,8 @@ namespace Kafka.Protocol
                     instance.StateEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     instance.LeaderEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     instance.StartOffset = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                    if (instance.Version >= 1)
+                        instance.DeliveryCompleteCount = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     if (instance.IsFlexibleVersion)
                     {
                         var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
@@ -271,6 +273,8 @@ namespace Kafka.Protocol
                     await _stateEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     await _startOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                    if (Version >= 1)
+                        await _deliveryCompleteCount.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     if (IsFlexibleVersion)
                     {
                         await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
@@ -420,6 +424,32 @@ namespace Kafka.Protocol
                 public PartitionResult WithStartOffset(Int64 startOffset)
                 {
                     StartOffset = startOffset;
+                    return this;
+                }
+
+                private Int32 _deliveryCompleteCount = new Int32(-1);
+                /// <summary>
+                /// <para>The number of offsets greater than or equal to share-partition start offset for which delivery has been completed.</para>
+                /// <para>Versions: 1+</para>
+                /// <para>Default: -1</para>
+                /// </summary>
+                public Int32 DeliveryCompleteCount
+                {
+                    get => _deliveryCompleteCount;
+                    private set
+                    {
+                        _deliveryCompleteCount = value;
+                    }
+                }
+
+                /// <summary>
+                /// <para>The number of offsets greater than or equal to share-partition start offset for which delivery has been completed.</para>
+                /// <para>Versions: 1+</para>
+                /// <para>Default: -1</para>
+                /// </summary>
+                public PartitionResult WithDeliveryCompleteCount(Int32 deliveryCompleteCount)
+                {
+                    DeliveryCompleteCount = deliveryCompleteCount;
                     return this;
                 }
             }

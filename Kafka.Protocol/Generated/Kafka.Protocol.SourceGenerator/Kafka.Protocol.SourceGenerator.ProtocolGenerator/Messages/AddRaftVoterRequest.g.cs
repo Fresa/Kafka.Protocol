@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public AddRaftVoterRequest(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"AddRaftVoterRequest does not support version {version}. Valid versions are: 0");
+                throw new UnsupportedVersionException($"AddRaftVoterRequest does not support version {version}. Valid versions are: 0-1");
             Version = version;
             IsFlexibleVersion = true;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(80);
         public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(0);
+        public static readonly Int16 MaxVersion = Int16.From(1);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -45,7 +45,7 @@ namespace Kafka.Protocol
             return new Tags.TagSection();
         }
 
-        internal override int GetSize() => _clusterId.GetSize(IsFlexibleVersion) + _timeoutMs.GetSize(IsFlexibleVersion) + _voterId.GetSize(IsFlexibleVersion) + _voterDirectoryId.GetSize(IsFlexibleVersion) + _listenersCollection.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+        internal override int GetSize() => _clusterId.GetSize(IsFlexibleVersion) + _timeoutMs.GetSize(IsFlexibleVersion) + _voterId.GetSize(IsFlexibleVersion) + _voterDirectoryId.GetSize(IsFlexibleVersion) + _listenersCollection.GetSize(IsFlexibleVersion) + (Version >= 1 ? _ackWhenCommitted.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
         internal static async ValueTask<AddRaftVoterRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
         {
             var instance = new AddRaftVoterRequest(version);
@@ -54,6 +54,8 @@ namespace Kafka.Protocol
             instance.VoterId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             instance.VoterDirectoryId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             instance.ListenersCollection = await Map<String, Listener>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Listener.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.Name, cancellationToken).ConfigureAwait(false);
+            if (instance.Version >= 1)
+                instance.AckWhenCommitted = await Boolean.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (instance.IsFlexibleVersion)
             {
                 var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
@@ -77,6 +79,8 @@ namespace Kafka.Protocol
             await _voterId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _voterDirectoryId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _listenersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (Version >= 1)
+                await _ackWhenCommitted.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (IsFlexibleVersion)
             {
                 await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
@@ -337,6 +341,34 @@ namespace Kafka.Protocol
                 Port = port;
                 return this;
             }
+        }
+
+        private Boolean _ackWhenCommitted = new Boolean(true);
+        /// <summary>
+        /// <para>When true, return a response after the new voter set is committed. Otherwise, return after the leader writes the changes locally.</para>
+        /// <para>Versions: 1+</para>
+        /// <para>Default: true</para>
+        /// </summary>
+        public Boolean AckWhenCommitted
+        {
+            get => _ackWhenCommitted;
+            private set
+            {
+                if (Version >= 1 == false)
+                    throw new UnsupportedVersionException($"AckWhenCommitted does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+                _ackWhenCommitted = value;
+            }
+        }
+
+        /// <summary>
+        /// <para>When true, return a response after the new voter set is committed. Otherwise, return after the leader writes the changes locally.</para>
+        /// <para>Versions: 1+</para>
+        /// <para>Default: true</para>
+        /// </summary>
+        public AddRaftVoterRequest WithAckWhenCommitted(Boolean ackWhenCommitted)
+        {
+            AckWhenCommitted = ackWhenCommitted;
+            return this;
         }
 
         public AddRaftVoterResponse Respond() => new AddRaftVoterResponse(Version);

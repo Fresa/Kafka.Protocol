@@ -219,7 +219,7 @@ namespace Kafka.Protocol
 
         private Int32 _controllerId = new Int32(-1);
         /// <summary>
-        /// <para>The ID of the controller broker.</para>
+        /// <para>The ID of the controller. When handled by a controller, returns the current voter leader ID. When handled by a broker, returns a random alive broker ID as a fallback.</para>
         /// <para>Versions: 0+</para>
         /// <para>Default: -1</para>
         /// </summary>
@@ -233,7 +233,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The ID of the controller broker.</para>
+        /// <para>The ID of the controller. When handled by a controller, returns the current voter leader ID. When handled by a broker, returns a random alive broker ID as a fallback.</para>
         /// <para>Versions: 0+</para>
         /// <para>Default: -1</para>
         /// </summary>
