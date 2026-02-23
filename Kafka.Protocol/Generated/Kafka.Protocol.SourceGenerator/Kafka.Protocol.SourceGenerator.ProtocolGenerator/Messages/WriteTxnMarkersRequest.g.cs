@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public WriteTxnMarkersRequest(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"WriteTxnMarkersRequest does not support version {version}. Valid versions are: 1");
+                throw new UnsupportedVersionException($"WriteTxnMarkersRequest does not support version {version}. Valid versions are: 1-2");
             Version = version;
             IsFlexibleVersion = version >= 1;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(27);
         public static readonly Int16 MinVersion = Int16.From(1);
-        public static readonly Int16 MaxVersion = Int16.From(1);
+        public static readonly Int16 MaxVersion = Int16.From(2);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -127,7 +127,7 @@ namespace Kafka.Protocol
             }
 
             int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
-            internal int GetSize(bool _) => _producerId.GetSize(IsFlexibleVersion) + _producerEpoch.GetSize(IsFlexibleVersion) + _transactionResult.GetSize(IsFlexibleVersion) + _topicsCollection.GetSize(IsFlexibleVersion) + _coordinatorEpoch.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+            internal int GetSize(bool _) => _producerId.GetSize(IsFlexibleVersion) + _producerEpoch.GetSize(IsFlexibleVersion) + _transactionResult.GetSize(IsFlexibleVersion) + _topicsCollection.GetSize(IsFlexibleVersion) + _coordinatorEpoch.GetSize(IsFlexibleVersion) + (Version >= 2 ? _transactionVersion.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
             internal static async ValueTask<WritableTxnMarker> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
             {
                 var instance = new WritableTxnMarker(version);
@@ -136,6 +136,8 @@ namespace Kafka.Protocol
                 instance.TransactionResult = await Boolean.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 instance.TopicsCollection = await Array<WritableTxnMarkerTopic>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => WritableTxnMarkerTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
                 instance.CoordinatorEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (instance.Version >= 2)
+                    instance.TransactionVersion = await Int8.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 if (instance.IsFlexibleVersion)
                 {
                     var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
@@ -160,6 +162,8 @@ namespace Kafka.Protocol
                 await _transactionResult.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 await _coordinatorEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (Version >= 2)
+                    await _transactionVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 if (IsFlexibleVersion)
                 {
                     await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
@@ -393,6 +397,32 @@ namespace Kafka.Protocol
             public WritableTxnMarker WithCoordinatorEpoch(Int32 coordinatorEpoch)
             {
                 CoordinatorEpoch = coordinatorEpoch;
+                return this;
+            }
+
+            private Int8 _transactionVersion = new Int8(0);
+            /// <summary>
+            /// <para>Transaction version of the marker. Ex: 0/1 = legacy (TV0/TV1), 2 = TV2 etc.</para>
+            /// <para>Versions: 2+</para>
+            /// <para>Default: 0</para>
+            /// </summary>
+            public Int8 TransactionVersion
+            {
+                get => _transactionVersion;
+                private set
+                {
+                    _transactionVersion = value;
+                }
+            }
+
+            /// <summary>
+            /// <para>Transaction version of the marker. Ex: 0/1 = legacy (TV0/TV1), 2 = TV2 etc.</para>
+            /// <para>Versions: 2+</para>
+            /// <para>Default: 0</para>
+            /// </summary>
+            public WritableTxnMarker WithTransactionVersion(Int8 transactionVersion)
+            {
+                TransactionVersion = transactionVersion;
                 return this;
             }
         }

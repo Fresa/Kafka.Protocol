@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public DescribeShareGroupOffsetsResponse(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"DescribeShareGroupOffsetsResponse does not support version {version}. Valid versions are: 0");
+                throw new UnsupportedVersionException($"DescribeShareGroupOffsetsResponse does not support version {version}. Valid versions are: 0-1");
             Version = version;
             IsFlexibleVersion = true;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(90);
         public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(0);
+        public static readonly Int16 MaxVersion = Int16.From(1);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -398,13 +398,15 @@ namespace Kafka.Protocol
                     }
 
                     int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
-                    internal int GetSize(bool _) => _partitionIndex.GetSize(IsFlexibleVersion) + _startOffset.GetSize(IsFlexibleVersion) + _leaderEpoch.GetSize(IsFlexibleVersion) + _errorCode.GetSize(IsFlexibleVersion) + _errorMessage.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+                    internal int GetSize(bool _) => _partitionIndex.GetSize(IsFlexibleVersion) + _startOffset.GetSize(IsFlexibleVersion) + _leaderEpoch.GetSize(IsFlexibleVersion) + (Version >= 1 ? _lag.GetSize(IsFlexibleVersion) : 0) + _errorCode.GetSize(IsFlexibleVersion) + _errorMessage.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
                     internal static async ValueTask<DescribeShareGroupOffsetsResponsePartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
                     {
                         var instance = new DescribeShareGroupOffsetsResponsePartition(version);
                         instance.PartitionIndex = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                         instance.StartOffset = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                         instance.LeaderEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                        if (instance.Version >= 1)
+                            instance.Lag = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                         instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                         instance.ErrorMessage = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                         if (instance.IsFlexibleVersion)
@@ -429,6 +431,8 @@ namespace Kafka.Protocol
                         await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                         await _startOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                         await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                        if (Version >= 1)
+                            await _lag.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                         await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                         await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                         if (IsFlexibleVersion)
@@ -506,6 +510,32 @@ namespace Kafka.Protocol
                     public DescribeShareGroupOffsetsResponsePartition WithLeaderEpoch(Int32 leaderEpoch)
                     {
                         LeaderEpoch = leaderEpoch;
+                        return this;
+                    }
+
+                    private Int64 _lag = new Int64(-1);
+                    /// <summary>
+                    /// <para>The share-partition lag.</para>
+                    /// <para>Versions: 1+</para>
+                    /// <para>Default: -1</para>
+                    /// </summary>
+                    public Int64 Lag
+                    {
+                        get => _lag;
+                        private set
+                        {
+                            _lag = value;
+                        }
+                    }
+
+                    /// <summary>
+                    /// <para>The share-partition lag.</para>
+                    /// <para>Versions: 1+</para>
+                    /// <para>Default: -1</para>
+                    /// </summary>
+                    public DescribeShareGroupOffsetsResponsePartition WithLag(Int64 lag)
+                    {
+                        Lag = lag;
                         return this;
                     }
 

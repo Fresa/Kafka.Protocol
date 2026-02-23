@@ -198,7 +198,7 @@ namespace Kafka.Protocol
 
             private NullableString _resourceNameFilter = NullableString.Default;
             /// <summary>
-            /// <para>The resource name.</para>
+            /// <para>The resource name, or null to match any resource name.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public String? ResourceNameFilter
@@ -211,7 +211,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The resource name.</para>
+            /// <para>The resource name, or null to match any resource name.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public DeleteAclsFilter WithResourceNameFilter(String? resourceNameFilter)

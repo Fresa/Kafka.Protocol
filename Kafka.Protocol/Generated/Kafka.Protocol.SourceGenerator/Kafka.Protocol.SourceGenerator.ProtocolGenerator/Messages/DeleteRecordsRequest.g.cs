@@ -297,7 +297,7 @@ namespace Kafka.Protocol
 
                 private Int64 _offset = Int64.Default;
                 /// <summary>
-                /// <para>The deletion offset.</para>
+                /// <para>The deletion offset. -1 means that records should be truncated to the high watermark.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public Int64 Offset
@@ -310,7 +310,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>The deletion offset.</para>
+                /// <para>The deletion offset. -1 means that records should be truncated to the high watermark.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public DeleteRecordsPartition WithOffset(Int64 offset)

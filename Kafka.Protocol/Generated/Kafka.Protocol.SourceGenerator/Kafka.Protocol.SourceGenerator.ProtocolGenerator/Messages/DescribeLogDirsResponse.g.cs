@@ -570,7 +570,7 @@ namespace Kafka.Protocol
 
             private Int64 _totalBytes = new Int64(-1);
             /// <summary>
-            /// <para>The total size in bytes of the volume the log directory is in.</para>
+            /// <para>The total size in bytes of the volume the log directory is in. This value does not include the size of data stored in remote storage.</para>
             /// <para>Versions: 4+</para>
             /// <para>Default: -1</para>
             /// </summary>
@@ -584,7 +584,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The total size in bytes of the volume the log directory is in.</para>
+            /// <para>The total size in bytes of the volume the log directory is in. This value does not include the size of data stored in remote storage.</para>
             /// <para>Versions: 4+</para>
             /// <para>Default: -1</para>
             /// </summary>
@@ -596,7 +596,7 @@ namespace Kafka.Protocol
 
             private Int64 _usableBytes = new Int64(-1);
             /// <summary>
-            /// <para>The usable size in bytes of the volume the log directory is in.</para>
+            /// <para>The usable size in bytes of the volume the log directory is in. This value does not include the size of data stored in remote storage.</para>
             /// <para>Versions: 4+</para>
             /// <para>Default: -1</para>
             /// </summary>
@@ -610,7 +610,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The usable size in bytes of the volume the log directory is in.</para>
+            /// <para>The usable size in bytes of the volume the log directory is in. This value does not include the size of data stored in remote storage.</para>
             /// <para>Versions: 4+</para>
             /// <para>Default: -1</para>
             /// </summary>

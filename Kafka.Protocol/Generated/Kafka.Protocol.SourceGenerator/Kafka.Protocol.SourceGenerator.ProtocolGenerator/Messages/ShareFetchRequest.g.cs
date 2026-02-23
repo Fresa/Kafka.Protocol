@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public ShareFetchRequest(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"ShareFetchRequest does not support version {version}. Valid versions are: 1");
+                throw new UnsupportedVersionException($"ShareFetchRequest does not support version {version}. Valid versions are: 1-2");
             Version = version;
             IsFlexibleVersion = true;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(78);
         public static readonly Int16 MinVersion = Int16.From(1);
-        public static readonly Int16 MaxVersion = Int16.From(1);
+        public static readonly Int16 MaxVersion = Int16.From(2);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -45,7 +45,7 @@ namespace Kafka.Protocol
             return new Tags.TagSection();
         }
 
-        internal override int GetSize() => _groupId.GetSize(IsFlexibleVersion) + _memberId.GetSize(IsFlexibleVersion) + _shareSessionEpoch.GetSize(IsFlexibleVersion) + _maxWaitMs.GetSize(IsFlexibleVersion) + _minBytes.GetSize(IsFlexibleVersion) + _maxBytes.GetSize(IsFlexibleVersion) + (Version >= 1 ? _maxRecords.GetSize(IsFlexibleVersion) : 0) + (Version >= 1 ? _batchSize.GetSize(IsFlexibleVersion) : 0) + _topicsCollection.GetSize(IsFlexibleVersion) + _forgottenTopicsDataCollection.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+        internal override int GetSize() => _groupId.GetSize(IsFlexibleVersion) + _memberId.GetSize(IsFlexibleVersion) + _shareSessionEpoch.GetSize(IsFlexibleVersion) + _maxWaitMs.GetSize(IsFlexibleVersion) + _minBytes.GetSize(IsFlexibleVersion) + _maxBytes.GetSize(IsFlexibleVersion) + (Version >= 1 ? _maxRecords.GetSize(IsFlexibleVersion) : 0) + (Version >= 1 ? _batchSize.GetSize(IsFlexibleVersion) : 0) + (Version >= 2 ? _shareAcquireMode.GetSize(IsFlexibleVersion) : 0) + (Version >= 2 ? _isRenewAck.GetSize(IsFlexibleVersion) : 0) + _topicsCollection.GetSize(IsFlexibleVersion) + _forgottenTopicsDataCollection.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
         internal static async ValueTask<ShareFetchRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
         {
             var instance = new ShareFetchRequest(version);
@@ -59,6 +59,10 @@ namespace Kafka.Protocol
                 instance.MaxRecords = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (instance.Version >= 1)
                 instance.BatchSize = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (instance.Version >= 2)
+                instance.ShareAcquireMode = await Int8.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (instance.Version >= 2)
+                instance.IsRenewAck = await Boolean.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             instance.TopicsCollection = await Map<Uuid, FetchTopic>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => FetchTopic.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.TopicId, cancellationToken).ConfigureAwait(false);
             instance.ForgottenTopicsDataCollection = await Array<ForgottenTopic>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => ForgottenTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
             if (instance.IsFlexibleVersion)
@@ -89,6 +93,10 @@ namespace Kafka.Protocol
                 await _maxRecords.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (Version >= 1)
                 await _batchSize.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (Version >= 2)
+                await _shareAcquireMode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (Version >= 2)
+                await _isRenewAck.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _forgottenTopicsDataCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (IsFlexibleVersion)
@@ -294,6 +302,60 @@ namespace Kafka.Protocol
         public ShareFetchRequest WithBatchSize(Int32 batchSize)
         {
             BatchSize = batchSize;
+            return this;
+        }
+
+        private Int8 _shareAcquireMode = new Int8(0);
+        /// <summary>
+        /// <para>The acquire mode to control the fetch behavior - 0:batch-optimized,1:record-limit.</para>
+        /// <para>Versions: 2+</para>
+        /// <para>Default: 0</para>
+        /// </summary>
+        public Int8 ShareAcquireMode
+        {
+            get => _shareAcquireMode;
+            private set
+            {
+                _shareAcquireMode = value;
+            }
+        }
+
+        /// <summary>
+        /// <para>The acquire mode to control the fetch behavior - 0:batch-optimized,1:record-limit.</para>
+        /// <para>Versions: 2+</para>
+        /// <para>Default: 0</para>
+        /// </summary>
+        public ShareFetchRequest WithShareAcquireMode(Int8 shareAcquireMode)
+        {
+            ShareAcquireMode = shareAcquireMode;
+            return this;
+        }
+
+        private Boolean _isRenewAck = new Boolean(false);
+        /// <summary>
+        /// <para>Whether Renew type acknowledgements present in AcknowledgementBatches.</para>
+        /// <para>Versions: 2+</para>
+        /// <para>Default: false</para>
+        /// </summary>
+        public Boolean IsRenewAck
+        {
+            get => _isRenewAck;
+            private set
+            {
+                if (Version >= 2 == false)
+                    throw new UnsupportedVersionException($"IsRenewAck does not support version {Version} and has been defined as not ignorable. Supported versions: 2+");
+                _isRenewAck = value;
+            }
+        }
+
+        /// <summary>
+        /// <para>Whether Renew type acknowledgements present in AcknowledgementBatches.</para>
+        /// <para>Versions: 2+</para>
+        /// <para>Default: false</para>
+        /// </summary>
+        public ShareFetchRequest WithIsRenewAck(Boolean isRenewAck)
+        {
+            IsRenewAck = isRenewAck;
             return this;
         }
 
@@ -682,7 +744,7 @@ namespace Kafka.Protocol
 
                     private Array<Int8> _acknowledgeTypesCollection = Array.Empty<Int8>();
                     /// <summary>
-                    /// <para>Array of acknowledge types - 0:Gap,1:Accept,2:Release,3:Reject.</para>
+                    /// <para>Array of acknowledge types - 0:Gap,1:Accept,2:Release,3:Reject,4:Renew.</para>
                     /// <para>Versions: 0+</para>
                     /// </summary>
                     public Array<Int8> AcknowledgeTypesCollection
@@ -695,7 +757,7 @@ namespace Kafka.Protocol
                     }
 
                     /// <summary>
-                    /// <para>Array of acknowledge types - 0:Gap,1:Accept,2:Release,3:Reject.</para>
+                    /// <para>Array of acknowledge types - 0:Gap,1:Accept,2:Release,3:Reject,4:Renew.</para>
                     /// <para>Versions: 0+</para>
                     /// </summary>
                     public AcknowledgementBatch WithAcknowledgeTypesCollection(Array<Int8> acknowledgeTypesCollection)
