@@ -511,7 +511,7 @@ namespace Kafka.Protocol
                 }
             }
 
-            private Endpoint _userEndpoint = default !;
+            private Endpoint _userEndpoint = default!;
             /// <summary>
             /// <para>User-defined endpoint to connect to the node</para>
             /// <para>Versions: 0+</para>

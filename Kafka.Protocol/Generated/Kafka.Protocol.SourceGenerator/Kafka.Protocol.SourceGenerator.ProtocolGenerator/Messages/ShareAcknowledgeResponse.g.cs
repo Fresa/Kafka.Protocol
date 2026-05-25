@@ -457,7 +457,7 @@ namespace Kafka.Protocol
                     return this;
                 }
 
-                private LeaderIdAndEpoch _currentLeader = default !;
+                private LeaderIdAndEpoch _currentLeader = default!;
                 /// <summary>
                 /// <para>The current leader of the partition.</para>
                 /// <para>Versions: 0+</para>

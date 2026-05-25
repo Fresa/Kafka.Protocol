@@ -397,7 +397,7 @@ namespace Kafka.Protocol
                 }
             }
 
-            private KRaftVersionFeature _kRaftVersionFeature = default !;
+            private KRaftVersionFeature _kRaftVersionFeature = default!;
             /// <summary>
             /// <para>The range of versions of the protocol that the replica supports.</para>
             /// <para>Versions: 0+</para>

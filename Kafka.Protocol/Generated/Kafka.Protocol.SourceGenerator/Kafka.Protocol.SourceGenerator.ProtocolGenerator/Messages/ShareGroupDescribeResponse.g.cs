@@ -611,7 +611,7 @@ namespace Kafka.Protocol
                     return this;
                 }
 
-                private Assignment _assignment = default !;
+                private Assignment _assignment = default!;
                 /// <summary>
                 /// <para>The current assignment.</para>
                 /// <para>Versions: 0+</para>

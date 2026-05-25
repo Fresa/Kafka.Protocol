@@ -410,7 +410,7 @@ namespace Kafka.Protocol
                     return this;
                 }
 
-                private SnapshotId _snapshotId = default !;
+                private SnapshotId _snapshotId = default!;
                 /// <summary>
                 /// <para>The snapshot endOffset and epoch fetched.</para>
                 /// <para>Versions: 0+</para>
@@ -534,7 +534,7 @@ namespace Kafka.Protocol
                 }
 
                 private bool _currentLeaderIsSet;
-                private LeaderIdAndEpoch _currentLeader = default !;
+                private LeaderIdAndEpoch _currentLeader = default!;
                 /// <summary>
                 /// <para>The leader of the partition at the time of the snapshot.</para>
                 /// <para>Versions: 0+</para>
