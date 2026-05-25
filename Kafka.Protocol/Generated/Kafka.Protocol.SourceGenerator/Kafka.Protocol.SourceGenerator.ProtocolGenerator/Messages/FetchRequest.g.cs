@@ -201,7 +201,7 @@ namespace Kafka.Protocol
         }
 
         private bool _replicaStateIsSet;
-        private ReplicaState _replicaState = default !;
+        private ReplicaState _replicaState = default!;
         /// <summary>
         /// <para>The state of the replica in the follower.</para>
         /// <para>Versions: 15+</para>

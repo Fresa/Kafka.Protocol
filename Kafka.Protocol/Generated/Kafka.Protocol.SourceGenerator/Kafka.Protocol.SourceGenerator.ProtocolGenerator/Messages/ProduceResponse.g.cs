@@ -656,7 +656,7 @@ namespace Kafka.Protocol
                 }
 
                 private bool _currentLeaderIsSet;
-                private LeaderIdAndEpoch _currentLeader = default !;
+                private LeaderIdAndEpoch _currentLeader = default!;
                 /// <summary>
                 /// <para>The leader broker that the producer should use for future requests.</para>
                 /// <para>Versions: 10+</para>

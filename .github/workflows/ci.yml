@@ -16,10 +16,10 @@ jobs:
       matrix:
         os: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Setup .NET
         id: dotnet
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: 9.0.x
       - name: Build
@@ -35,12 +35,13 @@ jobs:
 
   release:
     name: Create Release
-    uses: Fresa/Library.Net.ContinuousDelivery/.github/workflows/release.yml@v0
+    uses: Fresa/Library.Net.ContinuousDelivery/.github/workflows/release.yml@v1
     needs: test
     if: github.repository == 'Fresa/Kafka.Protocol' && github.actor != 'dependabot[bot]'
     with:
       project_path: Kafka.Protocol
       project_name: Kafka.Protocol
       dotnet_version: ${{ needs.test.outputs.dotnet_version }}
+      include_github_release_notes: true
     secrets: 
       nuget_api_key: ${{ secrets.NUGET_API_KEY }}

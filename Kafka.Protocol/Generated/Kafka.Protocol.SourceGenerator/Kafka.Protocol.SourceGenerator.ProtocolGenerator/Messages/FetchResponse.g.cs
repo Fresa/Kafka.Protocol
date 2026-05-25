@@ -602,7 +602,7 @@ namespace Kafka.Protocol
                 }
 
                 private bool _divergingEpochIsSet;
-                private EpochEndOffset _divergingEpoch = default !;
+                private EpochEndOffset _divergingEpoch = default!;
                 /// <summary>
                 /// <para>In case divergence is detected based on the `LastFetchedEpoch` and `FetchOffset` in the request, this field indicates the largest epoch and its end offset such that subsequent records are known to diverge.</para>
                 /// <para>Versions: 12+</para>
@@ -741,7 +741,7 @@ namespace Kafka.Protocol
                 }
 
                 private bool _currentLeaderIsSet;
-                private LeaderIdAndEpoch _currentLeader = default !;
+                private LeaderIdAndEpoch _currentLeader = default!;
                 /// <summary>
                 /// <para>The current leader of the partition.</para>
                 /// <para>Versions: 12+</para>
@@ -880,7 +880,7 @@ namespace Kafka.Protocol
                 }
 
                 private bool _snapshotIdIsSet;
-                private SnapshotId _snapshotId = default !;
+                private SnapshotId _snapshotId = default!;
                 /// <summary>
                 /// <para>In the case of fetching an offset less than the LogStartOffset, this is the end offset and epoch that should be used in the FetchSnapshot request.</para>
                 /// <para>Versions: 12+</para>

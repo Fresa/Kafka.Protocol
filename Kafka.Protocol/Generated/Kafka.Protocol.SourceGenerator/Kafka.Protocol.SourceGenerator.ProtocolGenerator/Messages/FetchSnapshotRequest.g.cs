@@ -438,7 +438,7 @@ namespace Kafka.Protocol
                     return this;
                 }
 
-                private SnapshotId _snapshotId = default !;
+                private SnapshotId _snapshotId = default!;
                 /// <summary>
                 /// <para>The snapshot endOffset and epoch to fetch.</para>
                 /// <para>Versions: 0+</para>

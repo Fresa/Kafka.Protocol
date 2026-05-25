@@ -141,7 +141,7 @@ namespace Kafka.Protocol
         }
 
         private bool _currentLeaderIsSet;
-        private CurrentLeader _currentLeader = default !;
+        private CurrentLeader _currentLeader = default!;
         /// <summary>
         /// <para>Details of the current Raft cluster leader.</para>
         /// <para>Versions: 0+</para>
