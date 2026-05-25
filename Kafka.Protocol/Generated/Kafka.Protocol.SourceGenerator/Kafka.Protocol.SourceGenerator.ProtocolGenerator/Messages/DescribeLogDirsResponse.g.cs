@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public DescribeLogDirsResponse(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"DescribeLogDirsResponse does not support version {version}. Valid versions are: 1-4");
+                throw new UnsupportedVersionException($"DescribeLogDirsResponse does not support version {version}. Valid versions are: 1-5");
             Version = version;
             IsFlexibleVersion = version >= 2;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(35);
         public static readonly Int16 MinVersion = Int16.From(1);
-        public static readonly Int16 MaxVersion = Int16.From(4);
+        public static readonly Int16 MaxVersion = Int16.From(5);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -181,7 +181,7 @@ namespace Kafka.Protocol
             }
 
             int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
-            internal int GetSize(bool _) => _errorCode.GetSize(IsFlexibleVersion) + _logDir.GetSize(IsFlexibleVersion) + _topicsCollection.GetSize(IsFlexibleVersion) + (Version >= 4 ? _totalBytes.GetSize(IsFlexibleVersion) : 0) + (Version >= 4 ? _usableBytes.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+            internal int GetSize(bool _) => _errorCode.GetSize(IsFlexibleVersion) + _logDir.GetSize(IsFlexibleVersion) + _topicsCollection.GetSize(IsFlexibleVersion) + (Version >= 4 ? _totalBytes.GetSize(IsFlexibleVersion) : 0) + (Version >= 4 ? _usableBytes.GetSize(IsFlexibleVersion) : 0) + (Version >= 5 ? _isCordoned.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
             internal static async ValueTask<DescribeLogDirsResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
             {
                 var instance = new DescribeLogDirsResult(version);
@@ -192,6 +192,8 @@ namespace Kafka.Protocol
                     instance.TotalBytes = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 if (instance.Version >= 4)
                     instance.UsableBytes = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (instance.Version >= 5)
+                    instance.IsCordoned = await Boolean.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 if (instance.IsFlexibleVersion)
                 {
                     var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
@@ -218,6 +220,8 @@ namespace Kafka.Protocol
                     await _totalBytes.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 if (Version >= 4)
                     await _usableBytes.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (Version >= 5)
+                    await _isCordoned.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 if (IsFlexibleVersion)
                 {
                     await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
@@ -617,6 +621,32 @@ namespace Kafka.Protocol
             public DescribeLogDirsResult WithUsableBytes(Int64 usableBytes)
             {
                 UsableBytes = usableBytes;
+                return this;
+            }
+
+            private Boolean _isCordoned = new Boolean(false);
+            /// <summary>
+            /// <para>True if this log directory is cordoned.</para>
+            /// <para>Versions: 5+</para>
+            /// <para>Default: false</para>
+            /// </summary>
+            public Boolean IsCordoned
+            {
+                get => _isCordoned;
+                private set
+                {
+                    _isCordoned = value;
+                }
+            }
+
+            /// <summary>
+            /// <para>True if this log directory is cordoned.</para>
+            /// <para>Versions: 5+</para>
+            /// <para>Default: false</para>
+            /// </summary>
+            public DescribeLogDirsResult WithIsCordoned(Boolean isCordoned)
+            {
+                IsCordoned = isCordoned;
                 return this;
             }
         }

@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public BrokerHeartbeatRequest(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"BrokerHeartbeatRequest does not support version {version}. Valid versions are: 0-1");
+                throw new UnsupportedVersionException($"BrokerHeartbeatRequest does not support version {version}. Valid versions are: 0-2");
             Version = version;
             IsFlexibleVersion = true;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(63);
         public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(1);
+        public static readonly Int16 MaxVersion = Int16.From(2);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -46,6 +46,11 @@ namespace Kafka.Protocol
             if (Version >= 1 && _offlineLogDirsCollectionIsSet)
             {
                 tags.Add(new Tags.TaggedField { Tag = 0, Field = _offlineLogDirsCollection });
+            }
+
+            if (Version >= 2 && _cordonedLogDirsCollectionIsSet)
+            {
+                tags.Add(new Tags.TaggedField { Tag = 1, Field = _cordonedLogDirsCollection });
             }
 
             return new Tags.TagSection(tags.ToArray());
@@ -76,6 +81,18 @@ namespace Kafka.Protocol
                             var size = instance._offlineLogDirsCollection.GetSize(true);
                             if (size != tag.Length)
                                 throw new CorruptMessageException($"Tagged field OfflineLogDirsCollection read length {tag.Length} but had actual length of {size}");
+                        }
+
+                            break;
+                        case 1:
+                            if (instance.Version >= 2)
+                                instance.CordonedLogDirsCollection = await NullableArray<Uuid>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
+                            else
+                                throw new InvalidOperationException($"Field CordonedLogDirsCollection is not supported for version {instance.Version}");
+                        {
+                            var size = instance._cordonedLogDirsCollection.GetSize(true);
+                            if (size != tag.Length)
+                                throw new CorruptMessageException($"Tagged field CordonedLogDirsCollection read length {tag.Length} but had actual length of {size}");
                         }
 
                             break;
@@ -248,6 +265,38 @@ namespace Kafka.Protocol
         public BrokerHeartbeatRequest WithOfflineLogDirsCollection(Array<Uuid> offlineLogDirsCollection)
         {
             OfflineLogDirsCollection = offlineLogDirsCollection;
+            return this;
+        }
+
+        private bool _cordonedLogDirsCollectionIsSet;
+        private NullableArray<Uuid> _cordonedLogDirsCollection = new NullableArray<Uuid>(null);
+        /// <summary>
+        /// <para>List of log directories that are cordoned. This is null before the broker reaches the RECOVERY state.</para>
+        /// <para>Versions: 2+</para>
+        /// <para>Default: null</para>
+        /// </summary>
+        public Array<Uuid>? CordonedLogDirsCollection
+        {
+            get => _cordonedLogDirsCollection;
+            private set
+            {
+                if (Version >= 2 == false)
+                    throw new UnsupportedVersionException($"CordonedLogDirsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 2+");
+                if (Version >= 2 == false && value == null)
+                    throw new UnsupportedVersionException($"CordonedLogDirsCollection does not support null for version {Version}. Supported versions for null value: 2+");
+                _cordonedLogDirsCollection = value;
+                _cordonedLogDirsCollectionIsSet = true;
+            }
+        }
+
+        /// <summary>
+        /// <para>List of log directories that are cordoned. This is null before the broker reaches the RECOVERY state.</para>
+        /// <para>Versions: 2+</para>
+        /// <para>Default: null</para>
+        /// </summary>
+        public BrokerHeartbeatRequest WithCordonedLogDirsCollection(Array<Uuid>? cordonedLogDirsCollection)
+        {
+            CordonedLogDirsCollection = cordonedLogDirsCollection;
             return this;
         }
 
