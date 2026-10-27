@@ -27,7 +27,7 @@ internal static class CommonStructExtensions
                     {
                         {{versionRange.Full.IfFalse(
                             $$"""
-                              if (versionRange.GetExpression("version") == false) 
+                              if (({{versionRange.GetExpression("version")}}) == false)
                                   throw new UnsupportedVersionException($"{{commonStruct.Name}} does not support version {version}. Valid versions are: {{commonStruct.Versions}}");
                               """)}}
                              
