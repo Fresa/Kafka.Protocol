@@ -49,7 +49,7 @@ namespace Kafka.Protocol
         internal static async ValueTask<DescribeProducersRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
         {
             var instance = new DescribeProducersRequest(version);
-            instance.TopicsCollection = await Array<TopicRequest>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => TopicRequest.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+            instance.TopicsCollection = await Map<String, TopicRequest>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => TopicRequest.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.Name, cancellationToken).ConfigureAwait(false);
             if (instance.IsFlexibleVersion)
             {
                 var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
@@ -75,12 +75,12 @@ namespace Kafka.Protocol
             }
         }
 
-        private Array<TopicRequest> _topicsCollection = Array.Empty<TopicRequest>();
+        private Map<String, TopicRequest> _topicsCollection = Map<String, TopicRequest>.Default;
         /// <summary>
         /// <para>The topics to list producers for.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
-        public Array<TopicRequest> TopicsCollection
+        public Map<String, TopicRequest> TopicsCollection
         {
             get => _topicsCollection;
             private set
@@ -95,7 +95,7 @@ namespace Kafka.Protocol
         /// </summary>
         public DescribeProducersRequest WithTopicsCollection(params Func<TopicRequest, TopicRequest>[] createFields)
         {
-            TopicsCollection = createFields.Select(createField => createField(new TopicRequest(Version))).ToArray();
+            TopicsCollection = createFields.Select(createField => createField(new TopicRequest(Version))).ToDictionary(field => field.Name);
             return this;
         }
 
@@ -106,7 +106,7 @@ namespace Kafka.Protocol
         /// </summary>
         public DescribeProducersRequest WithTopicsCollection(IEnumerable<CreateTopicRequest> createFields)
         {
-            TopicsCollection = createFields.Select(createField => createField(new TopicRequest(Version))).ToArray();
+            TopicsCollection = createFields.Select(createField => createField(new TopicRequest(Version))).ToDictionary(field => field.Name);
             return this;
         }
 

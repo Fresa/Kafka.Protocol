@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public TxnOffsetCommitRequest(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"TxnOffsetCommitRequest does not support version {version}. Valid versions are: 0-5");
+                throw new UnsupportedVersionException($"TxnOffsetCommitRequest does not support version {version}. Valid versions are: 0-6");
             Version = version;
             IsFlexibleVersion = version >= 3;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(28);
         public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(5);
+        public static readonly Int16 MaxVersion = Int16.From(6);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -45,7 +45,7 @@ namespace Kafka.Protocol
             return new Tags.TagSection();
         }
 
-        internal override int GetSize() => _transactionalId.GetSize(IsFlexibleVersion) + _groupId.GetSize(IsFlexibleVersion) + _producerId.GetSize(IsFlexibleVersion) + _producerEpoch.GetSize(IsFlexibleVersion) + (Version >= 3 ? _generationId.GetSize(IsFlexibleVersion) : 0) + (Version >= 3 ? _memberId.GetSize(IsFlexibleVersion) : 0) + (Version >= 3 ? _groupInstanceId.GetSize(IsFlexibleVersion) : 0) + _topicsCollection.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+        internal override int GetSize() => _transactionalId.GetSize(IsFlexibleVersion) + _groupId.GetSize(IsFlexibleVersion) + _producerId.GetSize(IsFlexibleVersion) + _producerEpoch.GetSize(IsFlexibleVersion) + (Version >= 3 ? _generationIdOrMemberEpoch.GetSize(IsFlexibleVersion) : 0) + (Version >= 3 ? _memberId.GetSize(IsFlexibleVersion) : 0) + (Version >= 3 ? _groupInstanceId.GetSize(IsFlexibleVersion) : 0) + _topicsCollection.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
         internal static async ValueTask<TxnOffsetCommitRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
         {
             var instance = new TxnOffsetCommitRequest(version);
@@ -54,7 +54,7 @@ namespace Kafka.Protocol
             instance.ProducerId = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             instance.ProducerEpoch = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (instance.Version >= 3)
-                instance.GenerationId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                instance.GenerationIdOrMemberEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (instance.Version >= 3)
                 instance.MemberId = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (instance.Version >= 3)
@@ -83,7 +83,7 @@ namespace Kafka.Protocol
             await _producerId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _producerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (Version >= 3)
-                await _generationId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                await _generationIdOrMemberEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (Version >= 3)
                 await _memberId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (Version >= 3)
@@ -191,31 +191,31 @@ namespace Kafka.Protocol
             return this;
         }
 
-        private Int32 _generationId = new Int32(-1);
+        private Int32 _generationIdOrMemberEpoch = new Int32(-1);
         /// <summary>
-        /// <para>The generation of the consumer.</para>
+        /// <para>The generation of the group if using the classic group protocol or the member epoch if using the consumer protocol.</para>
         /// <para>Versions: 3+</para>
         /// <para>Default: -1</para>
         /// </summary>
-        public Int32 GenerationId
+        public Int32 GenerationIdOrMemberEpoch
         {
-            get => _generationId;
+            get => _generationIdOrMemberEpoch;
             private set
             {
                 if (Version >= 3 == false)
-                    throw new UnsupportedVersionException($"GenerationId does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
-                _generationId = value;
+                    throw new UnsupportedVersionException($"GenerationIdOrMemberEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
+                _generationIdOrMemberEpoch = value;
             }
         }
 
         /// <summary>
-        /// <para>The generation of the consumer.</para>
+        /// <para>The generation of the group if using the classic group protocol or the member epoch if using the consumer protocol.</para>
         /// <para>Versions: 3+</para>
         /// <para>Default: -1</para>
         /// </summary>
-        public TxnOffsetCommitRequest WithGenerationId(Int32 generationId)
+        public TxnOffsetCommitRequest WithGenerationIdOrMemberEpoch(Int32 generationIdOrMemberEpoch)
         {
-            GenerationId = generationId;
+            GenerationIdOrMemberEpoch = generationIdOrMemberEpoch;
             return this;
         }
 
@@ -329,11 +329,14 @@ namespace Kafka.Protocol
             }
 
             int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
-            internal int GetSize(bool _) => _name.GetSize(IsFlexibleVersion) + _partitionsCollection.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+            internal int GetSize(bool _) => (Version >= 0 && Version <= 5 ? _name.GetSize(IsFlexibleVersion) : 0) + (Version >= 6 ? _topicId.GetSize(IsFlexibleVersion) : 0) + _partitionsCollection.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
             internal static async ValueTask<TxnOffsetCommitRequestTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
             {
                 var instance = new TxnOffsetCommitRequestTopic(version);
-                instance.Name = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (instance.Version >= 0 && instance.Version <= 5)
+                    instance.Name = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (instance.Version >= 6)
+                    instance.TopicId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 instance.PartitionsCollection = await Array<TxnOffsetCommitRequestPartition>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => TxnOffsetCommitRequestPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
                 if (instance.IsFlexibleVersion)
                 {
@@ -354,7 +357,10 @@ namespace Kafka.Protocol
             ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
             internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
             {
-                await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (Version >= 0 && Version <= 5)
+                    await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (Version >= 6)
+                    await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 if (IsFlexibleVersion)
                 {
@@ -365,7 +371,7 @@ namespace Kafka.Protocol
             private String _name = String.Default;
             /// <summary>
             /// <para>The topic name.</para>
-            /// <para>Versions: 0+</para>
+            /// <para>Versions: 0-5</para>
             /// </summary>
             public String Name
             {
@@ -378,11 +384,35 @@ namespace Kafka.Protocol
 
             /// <summary>
             /// <para>The topic name.</para>
-            /// <para>Versions: 0+</para>
+            /// <para>Versions: 0-5</para>
             /// </summary>
             public TxnOffsetCommitRequestTopic WithName(String name)
             {
                 Name = name;
+                return this;
+            }
+
+            private Uuid _topicId = Uuid.Default;
+            /// <summary>
+            /// <para>The topic ID.</para>
+            /// <para>Versions: 6+</para>
+            /// </summary>
+            public Uuid TopicId
+            {
+                get => _topicId;
+                private set
+                {
+                    _topicId = value;
+                }
+            }
+
+            /// <summary>
+            /// <para>The topic ID.</para>
+            /// <para>Versions: 6+</para>
+            /// </summary>
+            public TxnOffsetCommitRequestTopic WithTopicId(Uuid topicId)
+            {
+                TopicId = topicId;
                 return this;
             }
 

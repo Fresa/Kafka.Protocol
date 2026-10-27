@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public StreamsGroupDescribeRequest(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"StreamsGroupDescribeRequest does not support version {version}. Valid versions are: 0");
+                throw new UnsupportedVersionException($"StreamsGroupDescribeRequest does not support version {version}. Valid versions are: 0-1");
             Version = version;
             IsFlexibleVersion = true;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(89);
         public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(0);
+        public static readonly Int16 MaxVersion = Int16.From(1);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -45,12 +45,14 @@ namespace Kafka.Protocol
             return new Tags.TagSection();
         }
 
-        internal override int GetSize() => _groupIdsCollection.GetSize(IsFlexibleVersion) + _includeAuthorizedOperations.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+        internal override int GetSize() => _groupIdsCollection.GetSize(IsFlexibleVersion) + _includeAuthorizedOperations.GetSize(IsFlexibleVersion) + (Version >= 1 ? _includeTopologyDescription.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
         internal static async ValueTask<StreamsGroupDescribeRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
         {
             var instance = new StreamsGroupDescribeRequest(version);
             instance.GroupIdsCollection = await Array<String>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
             instance.IncludeAuthorizedOperations = await Boolean.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (instance.Version >= 1)
+                instance.IncludeTopologyDescription = await Boolean.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (instance.IsFlexibleVersion)
             {
                 var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
@@ -71,6 +73,8 @@ namespace Kafka.Protocol
         {
             await _groupIdsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _includeAuthorizedOperations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (Version >= 1)
+                await _includeTopologyDescription.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (IsFlexibleVersion)
             {
                 await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
@@ -122,6 +126,34 @@ namespace Kafka.Protocol
         public StreamsGroupDescribeRequest WithIncludeAuthorizedOperations(Boolean includeAuthorizedOperations)
         {
             IncludeAuthorizedOperations = includeAuthorizedOperations;
+            return this;
+        }
+
+        private Boolean _includeTopologyDescription = new Boolean(false);
+        /// <summary>
+        /// <para>Whether to include the full topology description from the topology description plugin in the response.</para>
+        /// <para>Versions: 1+</para>
+        /// <para>Default: false</para>
+        /// </summary>
+        public Boolean IncludeTopologyDescription
+        {
+            get => _includeTopologyDescription;
+            private set
+            {
+                if (Version >= 1 == false)
+                    throw new UnsupportedVersionException($"IncludeTopologyDescription does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+                _includeTopologyDescription = value;
+            }
+        }
+
+        /// <summary>
+        /// <para>Whether to include the full topology description from the topology description plugin in the response.</para>
+        /// <para>Versions: 1+</para>
+        /// <para>Default: false</para>
+        /// </summary>
+        public StreamsGroupDescribeRequest WithIncludeTopologyDescription(Boolean includeTopologyDescription)
+        {
+            IncludeTopologyDescription = includeTopologyDescription;
             return this;
         }
 

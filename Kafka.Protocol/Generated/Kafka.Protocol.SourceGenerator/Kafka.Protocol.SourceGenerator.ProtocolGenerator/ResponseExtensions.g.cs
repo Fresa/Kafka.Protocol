@@ -333,6 +333,10 @@
                    .WithMinVersion(StreamsGroupHeartbeatRequest.MinVersion)
                    .WithMaxVersion(StreamsGroupHeartbeatRequest.MaxVersion),
                key => key
+                   .WithApiKey(StreamsGroupTopologyDescriptionUpdateRequest.ApiKey)
+                   .WithMinVersion(StreamsGroupTopologyDescriptionUpdateRequest.MinVersion)
+                   .WithMaxVersion(StreamsGroupTopologyDescriptionUpdateRequest.MaxVersion),
+               key => key
                    .WithApiKey(SyncGroupRequest.ApiKey)
                    .WithMinVersion(SyncGroupRequest.MinVersion)
                    .WithMaxVersion(SyncGroupRequest.MaxVersion),
@@ -344,6 +348,10 @@
                    .WithApiKey(UnregisterBrokerRequest.ApiKey)
                    .WithMinVersion(UnregisterBrokerRequest.MinVersion)
                    .WithMaxVersion(UnregisterBrokerRequest.MaxVersion),
+               key => key
+                   .WithApiKey(UnregisterControllerRequest.ApiKey)
+                   .WithMinVersion(UnregisterControllerRequest.MinVersion)
+                   .WithMaxVersion(UnregisterControllerRequest.MaxVersion),
                key => key
                    .WithApiKey(UpdateFeaturesRequest.ApiKey)
                    .WithMinVersion(UpdateFeaturesRequest.MinVersion)

@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public ApiVersionsRequest(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"ApiVersionsRequest does not support version {version}. Valid versions are: 0-4");
+                throw new UnsupportedVersionException($"ApiVersionsRequest does not support version {version}. Valid versions are: 0-5");
             Version = version;
             IsFlexibleVersion = version >= 3;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(18);
         public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(4);
+        public static readonly Int16 MaxVersion = Int16.From(5);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -45,7 +45,7 @@ namespace Kafka.Protocol
             return new Tags.TagSection();
         }
 
-        internal override int GetSize() => (Version >= 3 ? _clientSoftwareName.GetSize(IsFlexibleVersion) : 0) + (Version >= 3 ? _clientSoftwareVersion.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+        internal override int GetSize() => (Version >= 3 ? _clientSoftwareName.GetSize(IsFlexibleVersion) : 0) + (Version >= 3 ? _clientSoftwareVersion.GetSize(IsFlexibleVersion) : 0) + (Version >= 5 ? _clusterId.GetSize(IsFlexibleVersion) : 0) + (Version >= 5 ? _nodeId.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
         internal static async ValueTask<ApiVersionsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
         {
             var instance = new ApiVersionsRequest(version);
@@ -53,6 +53,10 @@ namespace Kafka.Protocol
                 instance.ClientSoftwareName = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (instance.Version >= 3)
                 instance.ClientSoftwareVersion = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (instance.Version >= 5)
+                instance.ClusterId = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (instance.Version >= 5)
+                instance.NodeId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (instance.IsFlexibleVersion)
             {
                 var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
@@ -75,6 +79,10 @@ namespace Kafka.Protocol
                 await _clientSoftwareName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (Version >= 3)
                 await _clientSoftwareVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (Version >= 5)
+                await _clusterId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (Version >= 5)
+                await _nodeId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (IsFlexibleVersion)
             {
                 await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
@@ -126,6 +134,60 @@ namespace Kafka.Protocol
         public ApiVersionsRequest WithClientSoftwareVersion(String clientSoftwareVersion)
         {
             ClientSoftwareVersion = clientSoftwareVersion;
+            return this;
+        }
+
+        private NullableString _clusterId = new NullableString(null);
+        /// <summary>
+        /// <para>The cluster ID the client intends to connect to. Provide both ClusterId and NodeId, if known.</para>
+        /// <para>Versions: 5+</para>
+        /// <para>Default: null</para>
+        /// </summary>
+        public String? ClusterId
+        {
+            get => _clusterId;
+            private set
+            {
+                if (Version >= 5 == false && value == null)
+                    throw new UnsupportedVersionException($"ClusterId does not support null for version {Version}. Supported versions for null value: 5+");
+                _clusterId = value;
+            }
+        }
+
+        /// <summary>
+        /// <para>The cluster ID the client intends to connect to. Provide both ClusterId and NodeId, if known.</para>
+        /// <para>Versions: 5+</para>
+        /// <para>Default: null</para>
+        /// </summary>
+        public ApiVersionsRequest WithClusterId(String? clusterId)
+        {
+            ClusterId = clusterId;
+            return this;
+        }
+
+        private Int32 _nodeId = new Int32(-1);
+        /// <summary>
+        /// <para>The node ID the client intends to connect to. Provide both ClusterId and NodeId, if known.</para>
+        /// <para>Versions: 5+</para>
+        /// <para>Default: -1</para>
+        /// </summary>
+        public Int32 NodeId
+        {
+            get => _nodeId;
+            private set
+            {
+                _nodeId = value;
+            }
+        }
+
+        /// <summary>
+        /// <para>The node ID the client intends to connect to. Provide both ClusterId and NodeId, if known.</para>
+        /// <para>Versions: 5+</para>
+        /// <para>Default: -1</para>
+        /// </summary>
+        public ApiVersionsRequest WithNodeId(Int32 nodeId)
+        {
+            NodeId = nodeId;
             return this;
         }
 

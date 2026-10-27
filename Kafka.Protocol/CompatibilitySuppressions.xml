@@ -141,6 +141,12 @@
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Kafka.Protocol.DescribeProducersRequest.get_TopicsCollection</Target>
+    <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
+    <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Kafka.Protocol.ListOffsetsRequest.ListOffsetsTopic.ListOffsetsPartition.get_MaxNumOffsets</Target>
     <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
     <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
@@ -220,6 +226,18 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Kafka.Protocol.ShareFetchResponse.get_ResponsesCollection</Target>
+    <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
+    <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Kafka.Protocol.TxnOffsetCommitRequest.get_GenerationId</Target>
+    <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
+    <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Kafka.Protocol.TxnOffsetCommitRequest.WithGenerationId(Kafka.Protocol.Int32)</Target>
     <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
     <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
   </Suppression>

@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public StreamsGroupDescribeResponse(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"StreamsGroupDescribeResponse does not support version {version}. Valid versions are: 0");
+                throw new UnsupportedVersionException($"StreamsGroupDescribeResponse does not support version {version}. Valid versions are: 0-1");
             Version = version;
             IsFlexibleVersion = true;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(89);
         public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(0);
+        public static readonly Int16 MaxVersion = Int16.From(1);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -153,7 +153,7 @@ namespace Kafka.Protocol
             }
 
             int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
-            internal int GetSize(bool _) => _errorCode.GetSize(IsFlexibleVersion) + _errorMessage.GetSize(IsFlexibleVersion) + _groupId.GetSize(IsFlexibleVersion) + _groupState.GetSize(IsFlexibleVersion) + _groupEpoch.GetSize(IsFlexibleVersion) + _assignmentEpoch.GetSize(IsFlexibleVersion) + _topology.GetSize(IsFlexibleVersion) + _membersCollection.GetSize(IsFlexibleVersion) + _authorizedOperations.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+            internal int GetSize(bool _) => _errorCode.GetSize(IsFlexibleVersion) + _errorMessage.GetSize(IsFlexibleVersion) + _groupId.GetSize(IsFlexibleVersion) + _groupState.GetSize(IsFlexibleVersion) + _groupEpoch.GetSize(IsFlexibleVersion) + _assignmentEpoch.GetSize(IsFlexibleVersion) + _topology.GetSize(IsFlexibleVersion) + _membersCollection.GetSize(IsFlexibleVersion) + _authorizedOperations.GetSize(IsFlexibleVersion) + (Version >= 1 ? _topologyDescription.GetSize(IsFlexibleVersion) : 0) + (Version >= 1 ? _topologyDescriptionStatus.GetSize(IsFlexibleVersion) : 0) + (Version >= 1 ? _assignorName.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
             internal static async ValueTask<DescribedGroup> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
             {
                 var instance = new DescribedGroup(version);
@@ -166,6 +166,12 @@ namespace Kafka.Protocol
                 instance.Topology_ = await Nullable<Topology>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Topology.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
                 instance.MembersCollection = await Array<Member>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Member.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
                 instance.AuthorizedOperations = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (instance.Version >= 1)
+                    instance.TopologyDescription_ = await Nullable<TopologyDescription>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => TopologyDescription.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+                if (instance.Version >= 1)
+                    instance.TopologyDescriptionStatus = await Int8.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (instance.Version >= 1)
+                    instance.AssignorName = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 if (instance.IsFlexibleVersion)
                 {
                     var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
@@ -194,6 +200,12 @@ namespace Kafka.Protocol
                 await _topology.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 await _membersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 await _authorizedOperations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (Version >= 1)
+                    await _topologyDescription.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (Version >= 1)
+                    await _topologyDescriptionStatus.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (Version >= 1)
+                    await _assignorName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 if (IsFlexibleVersion)
                 {
                     await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
@@ -1165,6 +1177,92 @@ namespace Kafka.Protocol
                 AuthorizedOperations = authorizedOperations;
                 return this;
             }
+
+            private Nullable<TopologyDescription> _topologyDescription = new Nullable<TopologyDescription>(null);
+            /// <summary>
+            /// <para>The full topology description for this group. Non-null if and only if TopologyDescriptionStatus is AVAILABLE (3); null otherwise.</para>
+            /// <para>Versions: 1+</para>
+            /// <para>Default: null</para>
+            /// </summary>
+            public TopologyDescription? TopologyDescription_
+            {
+                get => _topologyDescription;
+                private set
+                {
+                    if (Version >= 1 == false)
+                        throw new UnsupportedVersionException($"TopologyDescription_ does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+                    if (Version >= 1 == false && value == null)
+                        throw new UnsupportedVersionException($"TopologyDescription_ does not support null for version {Version}. Supported versions for null value: 1+");
+                    _topologyDescription = value;
+                }
+            }
+
+            /// <summary>
+            /// <para>The full topology description for this group. Non-null if and only if TopologyDescriptionStatus is AVAILABLE (3); null otherwise.</para>
+            /// <para>Versions: 1+</para>
+            /// <para>Default: null</para>
+            /// </summary>
+            public DescribedGroup WithTopologyDescription_(TopologyDescription? topologyDescription)
+            {
+                TopologyDescription_ = topologyDescription;
+                return this;
+            }
+
+            private Int8 _topologyDescriptionStatus = new Int8(0);
+            /// <summary>
+            /// <para>The status of the topology description for this group, paired with TopologyDescription: 0=NOT_REQUESTED (client did not set IncludeTopologyDescription; TopologyDescription is null); 1=NOT_STORED (no description recorded for this group; TopologyDescription is null); 2=ERROR (broker failed to fetch the description, see broker logs; TopologyDescription is null); 3=AVAILABLE (TopologyDescription is non-null and carries the description).</para>
+            /// <para>Versions: 1+</para>
+            /// <para>Default: 0</para>
+            /// </summary>
+            public Int8 TopologyDescriptionStatus
+            {
+                get => _topologyDescriptionStatus;
+                private set
+                {
+                    if (Version >= 1 == false)
+                        throw new UnsupportedVersionException($"TopologyDescriptionStatus does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+                    _topologyDescriptionStatus = value;
+                }
+            }
+
+            /// <summary>
+            /// <para>The status of the topology description for this group, paired with TopologyDescription: 0=NOT_REQUESTED (client did not set IncludeTopologyDescription; TopologyDescription is null); 1=NOT_STORED (no description recorded for this group; TopologyDescription is null); 2=ERROR (broker failed to fetch the description, see broker logs; TopologyDescription is null); 3=AVAILABLE (TopologyDescription is non-null and carries the description).</para>
+            /// <para>Versions: 1+</para>
+            /// <para>Default: 0</para>
+            /// </summary>
+            public DescribedGroup WithTopologyDescriptionStatus(Int8 topologyDescriptionStatus)
+            {
+                TopologyDescriptionStatus = topologyDescriptionStatus;
+                return this;
+            }
+
+            private NullableString _assignorName = new NullableString(null);
+            /// <summary>
+            /// <para>The task assignor that the group coordinator will use for the next assignment computation. This may differ from the assignor that computed the current assignment, because changing the assignor configuration does not trigger a rebalance. Null in case of a describe error.</para>
+            /// <para>Versions: 1+</para>
+            /// <para>Default: null</para>
+            /// </summary>
+            public String? AssignorName
+            {
+                get => _assignorName;
+                private set
+                {
+                    if (Version >= 1 == false && value == null)
+                        throw new UnsupportedVersionException($"AssignorName does not support null for version {Version}. Supported versions for null value: 1+");
+                    _assignorName = value;
+                }
+            }
+
+            /// <summary>
+            /// <para>The task assignor that the group coordinator will use for the next assignment computation. This may differ from the assignor that computed the current assignment, because changing the assignor configuration does not trigger a rebalance. Null in case of a describe error.</para>
+            /// <para>Versions: 1+</para>
+            /// <para>Default: null</para>
+            /// </summary>
+            public DescribedGroup WithAssignorName(String? assignorName)
+            {
+                AssignorName = assignorName;
+                return this;
+            }
         }
 
         public class Endpoint : ISerialize
@@ -1861,6 +1959,566 @@ namespace Kafka.Protocol
             public TopicInfo WithTopicConfigsCollection(Array<KeyValue> topicConfigsCollection)
             {
                 TopicConfigsCollection = topicConfigsCollection;
+                return this;
+            }
+        }
+
+        public class TopologyDescription : ISerialize
+        {
+            internal TopologyDescription(Int16 version)
+            {
+                if ((version >= 1) == false)
+                    throw new UnsupportedVersionException($"TopologyDescription does not support version {version}. Valid versions are: 1+");
+                Version = version;
+                IsFlexibleVersion = true;
+            }
+
+            internal Int16 Version { get; }
+            internal bool IsFlexibleVersion { get; }
+
+            private Tags.TagSection CreateTagSection()
+            {
+                return new Tags.TagSection();
+            }
+
+            int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+            internal int GetSize(bool _) => (Version >= 1 ? _subtopologiesCollection.GetSize(IsFlexibleVersion) : 0) + (Version >= 1 ? _globalStoresCollection.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+            internal static async ValueTask<TopologyDescription> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+            {
+                var instance = new TopologyDescription(version);
+                if (instance.Version >= 1)
+                    instance.SubtopologiesCollection = await Array<TopologyDescriptionSubtopology>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => TopologyDescriptionSubtopology.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+                if (instance.Version >= 1)
+                    instance.GlobalStoresCollection = await Array<TopologyDescriptionGlobalStore>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => TopologyDescriptionGlobalStore.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+                if (instance.IsFlexibleVersion)
+                {
+                    var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+                    await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+                    {
+                        switch (tag.Tag)
+                        {
+                            default:
+                                throw new InvalidOperationException($"Tag '{tag.Tag}' for TopologyDescription is unknown");
+                        }
+                    }
+                }
+
+                return instance;
+            }
+
+            ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+            internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+            {
+                if (Version >= 1)
+                    await _subtopologiesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (Version >= 1)
+                    await _globalStoresCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (IsFlexibleVersion)
+                {
+                    await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+                }
+            }
+
+            private Array<TopologyDescriptionSubtopology> _subtopologiesCollection = Array.Empty<TopologyDescriptionSubtopology>();
+            /// <summary>
+            /// <para>The subtopologies that make up this topology.</para>
+            /// <para>Versions: 1+</para>
+            /// </summary>
+            public Array<TopologyDescriptionSubtopology> SubtopologiesCollection
+            {
+                get => _subtopologiesCollection;
+                private set
+                {
+                    if (Version >= 1 == false)
+                        throw new UnsupportedVersionException($"SubtopologiesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+                    _subtopologiesCollection = value;
+                }
+            }
+
+            /// <summary>
+            /// <para>The subtopologies that make up this topology.</para>
+            /// <para>Versions: 1+</para>
+            /// </summary>
+            public TopologyDescription WithSubtopologiesCollection(Array<TopologyDescriptionSubtopology> subtopologiesCollection)
+            {
+                SubtopologiesCollection = subtopologiesCollection;
+                return this;
+            }
+
+            private Array<TopologyDescriptionGlobalStore> _globalStoresCollection = Array.Empty<TopologyDescriptionGlobalStore>();
+            /// <summary>
+            /// <para>Global state stores used by this topology.</para>
+            /// <para>Versions: 1+</para>
+            /// </summary>
+            public Array<TopologyDescriptionGlobalStore> GlobalStoresCollection
+            {
+                get => _globalStoresCollection;
+                private set
+                {
+                    if (Version >= 1 == false)
+                        throw new UnsupportedVersionException($"GlobalStoresCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+                    _globalStoresCollection = value;
+                }
+            }
+
+            /// <summary>
+            /// <para>Global state stores used by this topology.</para>
+            /// <para>Versions: 1+</para>
+            /// </summary>
+            public TopologyDescription WithGlobalStoresCollection(Array<TopologyDescriptionGlobalStore> globalStoresCollection)
+            {
+                GlobalStoresCollection = globalStoresCollection;
+                return this;
+            }
+        }
+
+        public class TopologyDescriptionSubtopology : ISerialize
+        {
+            internal TopologyDescriptionSubtopology(Int16 version)
+            {
+                if ((version >= 1) == false)
+                    throw new UnsupportedVersionException($"TopologyDescriptionSubtopology does not support version {version}. Valid versions are: 1+");
+                Version = version;
+                IsFlexibleVersion = true;
+            }
+
+            internal Int16 Version { get; }
+            internal bool IsFlexibleVersion { get; }
+
+            private Tags.TagSection CreateTagSection()
+            {
+                return new Tags.TagSection();
+            }
+
+            int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+            internal int GetSize(bool _) => (Version >= 1 ? _subtopologyId.GetSize(IsFlexibleVersion) : 0) + (Version >= 1 ? _nodesCollection.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+            internal static async ValueTask<TopologyDescriptionSubtopology> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+            {
+                var instance = new TopologyDescriptionSubtopology(version);
+                if (instance.Version >= 1)
+                    instance.SubtopologyId = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (instance.Version >= 1)
+                    instance.NodesCollection = await Array<TopologyDescriptionNode>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => TopologyDescriptionNode.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+                if (instance.IsFlexibleVersion)
+                {
+                    var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+                    await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+                    {
+                        switch (tag.Tag)
+                        {
+                            default:
+                                throw new InvalidOperationException($"Tag '{tag.Tag}' for TopologyDescriptionSubtopology is unknown");
+                        }
+                    }
+                }
+
+                return instance;
+            }
+
+            ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+            internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+            {
+                if (Version >= 1)
+                    await _subtopologyId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (Version >= 1)
+                    await _nodesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (IsFlexibleVersion)
+                {
+                    await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+                }
+            }
+
+            private String _subtopologyId = String.Default;
+            /// <summary>
+            /// <para>The subtopology identifier, unique within the topology.</para>
+            /// <para>Versions: 1+</para>
+            /// </summary>
+            public String SubtopologyId
+            {
+                get => _subtopologyId;
+                private set
+                {
+                    if (Version >= 1 == false)
+                        throw new UnsupportedVersionException($"SubtopologyId does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+                    _subtopologyId = value;
+                }
+            }
+
+            /// <summary>
+            /// <para>The subtopology identifier, unique within the topology.</para>
+            /// <para>Versions: 1+</para>
+            /// </summary>
+            public TopologyDescriptionSubtopology WithSubtopologyId(String subtopologyId)
+            {
+                SubtopologyId = subtopologyId;
+                return this;
+            }
+
+            private Array<TopologyDescriptionNode> _nodesCollection = Array.Empty<TopologyDescriptionNode>();
+            /// <summary>
+            /// <para>The processing nodes in this subtopology.</para>
+            /// <para>Versions: 1+</para>
+            /// </summary>
+            public Array<TopologyDescriptionNode> NodesCollection
+            {
+                get => _nodesCollection;
+                private set
+                {
+                    if (Version >= 1 == false)
+                        throw new UnsupportedVersionException($"NodesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+                    _nodesCollection = value;
+                }
+            }
+
+            /// <summary>
+            /// <para>The processing nodes in this subtopology.</para>
+            /// <para>Versions: 1+</para>
+            /// </summary>
+            public TopologyDescriptionSubtopology WithNodesCollection(Array<TopologyDescriptionNode> nodesCollection)
+            {
+                NodesCollection = nodesCollection;
+                return this;
+            }
+        }
+
+        public class TopologyDescriptionNode : ISerialize
+        {
+            internal TopologyDescriptionNode(Int16 version)
+            {
+                if ((version >= 1) == false)
+                    throw new UnsupportedVersionException($"TopologyDescriptionNode does not support version {version}. Valid versions are: 1+");
+                Version = version;
+                IsFlexibleVersion = true;
+            }
+
+            internal Int16 Version { get; }
+            internal bool IsFlexibleVersion { get; }
+
+            private Tags.TagSection CreateTagSection()
+            {
+                return new Tags.TagSection();
+            }
+
+            int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+            internal int GetSize(bool _) => (Version >= 1 ? _name.GetSize(IsFlexibleVersion) : 0) + (Version >= 1 ? _nodeType.GetSize(IsFlexibleVersion) : 0) + (Version >= 1 ? _sourceTopicsCollection.GetSize(IsFlexibleVersion) : 0) + (Version >= 1 ? _sinkTopic.GetSize(IsFlexibleVersion) : 0) + (Version >= 1 ? _storesCollection.GetSize(IsFlexibleVersion) : 0) + (Version >= 1 ? _successorsCollection.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+            internal static async ValueTask<TopologyDescriptionNode> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+            {
+                var instance = new TopologyDescriptionNode(version);
+                if (instance.Version >= 1)
+                    instance.Name = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (instance.Version >= 1)
+                    instance.NodeType = await Int8.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (instance.Version >= 1)
+                    instance.SourceTopicsCollection = await Array<String>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
+                if (instance.Version >= 1)
+                    instance.SinkTopic = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (instance.Version >= 1)
+                    instance.StoresCollection = await Array<String>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
+                if (instance.Version >= 1)
+                    instance.SuccessorsCollection = await Array<String>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
+                if (instance.IsFlexibleVersion)
+                {
+                    var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+                    await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+                    {
+                        switch (tag.Tag)
+                        {
+                            default:
+                                throw new InvalidOperationException($"Tag '{tag.Tag}' for TopologyDescriptionNode is unknown");
+                        }
+                    }
+                }
+
+                return instance;
+            }
+
+            ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+            internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+            {
+                if (Version >= 1)
+                    await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (Version >= 1)
+                    await _nodeType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (Version >= 1)
+                    await _sourceTopicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (Version >= 1)
+                    await _sinkTopic.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (Version >= 1)
+                    await _storesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (Version >= 1)
+                    await _successorsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (IsFlexibleVersion)
+                {
+                    await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+                }
+            }
+
+            private String _name = String.Default;
+            /// <summary>
+            /// <para>The name of this node (e.g., KSTREAM-SOURCE-0000000000).</para>
+            /// <para>Versions: 1+</para>
+            /// </summary>
+            public String Name
+            {
+                get => _name;
+                private set
+                {
+                    if (Version >= 1 == false)
+                        throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+                    _name = value;
+                }
+            }
+
+            /// <summary>
+            /// <para>The name of this node (e.g., KSTREAM-SOURCE-0000000000).</para>
+            /// <para>Versions: 1+</para>
+            /// </summary>
+            public TopologyDescriptionNode WithName(String name)
+            {
+                Name = name;
+                return this;
+            }
+
+            private Int8 _nodeType = Int8.Default;
+            /// <summary>
+            /// <para>The type of this node: 1=SOURCE, 2=PROCESSOR, 3=SINK.</para>
+            /// <para>Versions: 1+</para>
+            /// </summary>
+            public Int8 NodeType
+            {
+                get => _nodeType;
+                private set
+                {
+                    if (Version >= 1 == false)
+                        throw new UnsupportedVersionException($"NodeType does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+                    _nodeType = value;
+                }
+            }
+
+            /// <summary>
+            /// <para>The type of this node: 1=SOURCE, 2=PROCESSOR, 3=SINK.</para>
+            /// <para>Versions: 1+</para>
+            /// </summary>
+            public TopologyDescriptionNode WithNodeType(Int8 nodeType)
+            {
+                NodeType = nodeType;
+                return this;
+            }
+
+            private Array<String> _sourceTopicsCollection = Array.Empty<String>();
+            /// <summary>
+            /// <para>The source topics this node reads from. Defined only for source nodes, may be empty if source topics are dynamically determined.</para>
+            /// <para>Versions: 1+</para>
+            /// </summary>
+            public Array<String> SourceTopicsCollection
+            {
+                get => _sourceTopicsCollection;
+                private set
+                {
+                    if (Version >= 1 == false)
+                        throw new UnsupportedVersionException($"SourceTopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+                    _sourceTopicsCollection = value;
+                }
+            }
+
+            /// <summary>
+            /// <para>The source topics this node reads from. Defined only for source nodes, may be empty if source topics are dynamically determined.</para>
+            /// <para>Versions: 1+</para>
+            /// </summary>
+            public TopologyDescriptionNode WithSourceTopicsCollection(Array<String> sourceTopicsCollection)
+            {
+                SourceTopicsCollection = sourceTopicsCollection;
+                return this;
+            }
+
+            private NullableString _sinkTopic = new NullableString(null);
+            /// <summary>
+            /// <para>The topic this node writes to. Defined only for sink nodes, may be null if sink topic is dynamically determined.</para>
+            /// <para>Versions: 1+</para>
+            /// <para>Default: null</para>
+            /// </summary>
+            public String? SinkTopic
+            {
+                get => _sinkTopic;
+                private set
+                {
+                    if (Version >= 1 == false)
+                        throw new UnsupportedVersionException($"SinkTopic does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+                    if (Version >= 1 == false && value == null)
+                        throw new UnsupportedVersionException($"SinkTopic does not support null for version {Version}. Supported versions for null value: 1+");
+                    _sinkTopic = value;
+                }
+            }
+
+            /// <summary>
+            /// <para>The topic this node writes to. Defined only for sink nodes, may be null if sink topic is dynamically determined.</para>
+            /// <para>Versions: 1+</para>
+            /// <para>Default: null</para>
+            /// </summary>
+            public TopologyDescriptionNode WithSinkTopic(String? sinkTopic)
+            {
+                SinkTopic = sinkTopic;
+                return this;
+            }
+
+            private Array<String> _storesCollection = Array.Empty<String>();
+            /// <summary>
+            /// <para>The state store names accessed by this node. Defined only for processor nodes.</para>
+            /// <para>Versions: 1+</para>
+            /// </summary>
+            public Array<String> StoresCollection
+            {
+                get => _storesCollection;
+                private set
+                {
+                    if (Version >= 1 == false)
+                        throw new UnsupportedVersionException($"StoresCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+                    _storesCollection = value;
+                }
+            }
+
+            /// <summary>
+            /// <para>The state store names accessed by this node. Defined only for processor nodes.</para>
+            /// <para>Versions: 1+</para>
+            /// </summary>
+            public TopologyDescriptionNode WithStoresCollection(Array<String> storesCollection)
+            {
+                StoresCollection = storesCollection;
+                return this;
+            }
+
+            private Array<String> _successorsCollection = Array.Empty<String>();
+            /// <summary>
+            /// <para>The names of successor nodes in the processing graph. Predecessor relationships are reconstructed from this field.</para>
+            /// <para>Versions: 1+</para>
+            /// </summary>
+            public Array<String> SuccessorsCollection
+            {
+                get => _successorsCollection;
+                private set
+                {
+                    if (Version >= 1 == false)
+                        throw new UnsupportedVersionException($"SuccessorsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+                    _successorsCollection = value;
+                }
+            }
+
+            /// <summary>
+            /// <para>The names of successor nodes in the processing graph. Predecessor relationships are reconstructed from this field.</para>
+            /// <para>Versions: 1+</para>
+            /// </summary>
+            public TopologyDescriptionNode WithSuccessorsCollection(Array<String> successorsCollection)
+            {
+                SuccessorsCollection = successorsCollection;
+                return this;
+            }
+        }
+
+        public class TopologyDescriptionGlobalStore : ISerialize
+        {
+            internal TopologyDescriptionGlobalStore(Int16 version)
+            {
+                if ((version >= 1) == false)
+                    throw new UnsupportedVersionException($"TopologyDescriptionGlobalStore does not support version {version}. Valid versions are: 1+");
+                Version = version;
+                IsFlexibleVersion = true;
+            }
+
+            internal Int16 Version { get; }
+            internal bool IsFlexibleVersion { get; }
+
+            private Tags.TagSection CreateTagSection()
+            {
+                return new Tags.TagSection();
+            }
+
+            int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+            internal int GetSize(bool _) => (Version >= 1 ? _source.GetSize(IsFlexibleVersion) : 0) + (Version >= 1 ? _processor.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+            internal static async ValueTask<TopologyDescriptionGlobalStore> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+            {
+                var instance = new TopologyDescriptionGlobalStore(version);
+                if (instance.Version >= 1)
+                    instance.Source = await TopologyDescriptionNode.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false);
+                if (instance.Version >= 1)
+                    instance.Processor = await TopologyDescriptionNode.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false);
+                if (instance.IsFlexibleVersion)
+                {
+                    var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+                    await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+                    {
+                        switch (tag.Tag)
+                        {
+                            default:
+                                throw new InvalidOperationException($"Tag '{tag.Tag}' for TopologyDescriptionGlobalStore is unknown");
+                        }
+                    }
+                }
+
+                return instance;
+            }
+
+            ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+            internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+            {
+                if (Version >= 1)
+                    await _source.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (Version >= 1)
+                    await _processor.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (IsFlexibleVersion)
+                {
+                    await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+                }
+            }
+
+            private TopologyDescriptionNode _source = default!;
+            /// <summary>
+            /// <para>The source node providing data to the global store.</para>
+            /// <para>Versions: 1+</para>
+            /// </summary>
+            public TopologyDescriptionNode Source
+            {
+                get => _source;
+                private set
+                {
+                    if (Version >= 1 == false)
+                        throw new UnsupportedVersionException($"Source does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+                    _source = value;
+                }
+            }
+
+            /// <summary>
+            /// <para>The source node providing data to the global store.</para>
+            /// <para>Versions: 1+</para>
+            /// </summary>
+            public TopologyDescriptionGlobalStore WithSource(TopologyDescriptionNode source)
+            {
+                Source = source;
+                return this;
+            }
+
+            private TopologyDescriptionNode _processor = default!;
+            /// <summary>
+            /// <para>The processor node that populates the global store.</para>
+            /// <para>Versions: 1+</para>
+            /// </summary>
+            public TopologyDescriptionNode Processor
+            {
+                get => _processor;
+                private set
+                {
+                    if (Version >= 1 == false)
+                        throw new UnsupportedVersionException($"Processor does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+                    _processor = value;
+                }
+            }
+
+            /// <summary>
+            /// <para>The processor node that populates the global store.</para>
+            /// <para>Versions: 1+</para>
+            /// </summary>
+            public TopologyDescriptionGlobalStore WithProcessor(TopologyDescriptionNode processor)
+            {
+                Processor = processor;
                 return this;
             }
         }
