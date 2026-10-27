@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public StreamsGroupHeartbeatResponse(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"StreamsGroupHeartbeatResponse does not support version {version}. Valid versions are: 0");
+                throw new UnsupportedVersionException($"StreamsGroupHeartbeatResponse does not support version {version}. Valid versions are: 0-1");
             Version = version;
             IsFlexibleVersion = true;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(88);
         public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(0);
+        public static readonly Int16 MaxVersion = Int16.From(1);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -45,7 +45,7 @@ namespace Kafka.Protocol
             return new Tags.TagSection();
         }
 
-        internal override int GetSize() => _throttleTimeMs.GetSize(IsFlexibleVersion) + _errorCode.GetSize(IsFlexibleVersion) + _errorMessage.GetSize(IsFlexibleVersion) + _memberId.GetSize(IsFlexibleVersion) + _memberEpoch.GetSize(IsFlexibleVersion) + _heartbeatIntervalMs.GetSize(IsFlexibleVersion) + _acceptableRecoveryLag.GetSize(IsFlexibleVersion) + _taskOffsetIntervalMs.GetSize(IsFlexibleVersion) + _statusCollection.GetSize(IsFlexibleVersion) + _activeTasksCollection.GetSize(IsFlexibleVersion) + _standbyTasksCollection.GetSize(IsFlexibleVersion) + _warmupTasksCollection.GetSize(IsFlexibleVersion) + _endpointInformationEpoch.GetSize(IsFlexibleVersion) + _partitionsByUserEndpointCollection.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+        internal override int GetSize() => _throttleTimeMs.GetSize(IsFlexibleVersion) + _errorCode.GetSize(IsFlexibleVersion) + _errorMessage.GetSize(IsFlexibleVersion) + _memberId.GetSize(IsFlexibleVersion) + _memberEpoch.GetSize(IsFlexibleVersion) + _heartbeatIntervalMs.GetSize(IsFlexibleVersion) + (Version >= 0 && Version <= 0 ? _acceptableRecoveryLagLegacy.GetSize(IsFlexibleVersion) : 0) + _taskOffsetIntervalMs.GetSize(IsFlexibleVersion) + (Version >= 1 ? _acceptableRecoveryLag.GetSize(IsFlexibleVersion) : 0) + _statusCollection.GetSize(IsFlexibleVersion) + _activeTasksCollection.GetSize(IsFlexibleVersion) + _standbyTasksCollection.GetSize(IsFlexibleVersion) + _warmupTasksCollection.GetSize(IsFlexibleVersion) + (Version >= 1 ? _topologyDescriptionRequired.GetSize(IsFlexibleVersion) : 0) + _endpointInformationEpoch.GetSize(IsFlexibleVersion) + _partitionsByUserEndpointCollection.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
         internal static async ValueTask<StreamsGroupHeartbeatResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
         {
             var instance = new StreamsGroupHeartbeatResponse(version);
@@ -55,12 +55,17 @@ namespace Kafka.Protocol
             instance.MemberId = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             instance.MemberEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             instance.HeartbeatIntervalMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-            instance.AcceptableRecoveryLag = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (instance.Version >= 0 && instance.Version <= 0)
+                instance.AcceptableRecoveryLagLegacy = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             instance.TaskOffsetIntervalMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (instance.Version >= 1)
+                instance.AcceptableRecoveryLag = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             instance.StatusCollection = await NullableArray<Status>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Status.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
             instance.ActiveTasksCollection = await NullableArray<TaskIds>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => TaskIds.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
             instance.StandbyTasksCollection = await NullableArray<TaskIds>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => TaskIds.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
             instance.WarmupTasksCollection = await NullableArray<TaskIds>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => TaskIds.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+            if (instance.Version >= 1)
+                instance.TopologyDescriptionRequired = await Boolean.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             instance.EndpointInformationEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             instance.PartitionsByUserEndpointCollection = await NullableArray<EndpointToPartitions>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => EndpointToPartitions.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
             if (instance.IsFlexibleVersion)
@@ -87,12 +92,17 @@ namespace Kafka.Protocol
             await _memberId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _memberEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _heartbeatIntervalMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-            await _acceptableRecoveryLag.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (Version >= 0 && Version <= 0)
+                await _acceptableRecoveryLagLegacy.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _taskOffsetIntervalMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (Version >= 1)
+                await _acceptableRecoveryLag.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _statusCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _activeTasksCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _standbyTasksCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _warmupTasksCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (Version >= 1)
+                await _topologyDescriptionRequired.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _endpointInformationEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _partitionsByUserEndpointCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (IsFlexibleVersion)
@@ -247,27 +257,29 @@ namespace Kafka.Protocol
             return this;
         }
 
-        private Int32 _acceptableRecoveryLag = Int32.Default;
+        private Int32 _acceptableRecoveryLagLegacy = Int32.Default;
         /// <summary>
-        /// <para>The maximal lag a warm-up task can have to be considered caught-up.</para>
-        /// <para>Versions: 0+</para>
+        /// <para>Deprecated. The maximum acceptable lag (number of offsets to catch up) for a client to be considered caught-up enough to receive an active task assignment. Use AcceptableRecoveryLag instead.</para>
+        /// <para>Versions: 0</para>
         /// </summary>
-        public Int32 AcceptableRecoveryLag
+        public Int32 AcceptableRecoveryLagLegacy
         {
-            get => _acceptableRecoveryLag;
+            get => _acceptableRecoveryLagLegacy;
             private set
             {
-                _acceptableRecoveryLag = value;
+                if (Version >= 0 && Version <= 0 == false)
+                    throw new UnsupportedVersionException($"AcceptableRecoveryLagLegacy does not support version {Version} and has been defined as not ignorable. Supported versions: 0");
+                _acceptableRecoveryLagLegacy = value;
             }
         }
 
         /// <summary>
-        /// <para>The maximal lag a warm-up task can have to be considered caught-up.</para>
-        /// <para>Versions: 0+</para>
+        /// <para>Deprecated. The maximum acceptable lag (number of offsets to catch up) for a client to be considered caught-up enough to receive an active task assignment. Use AcceptableRecoveryLag instead.</para>
+        /// <para>Versions: 0</para>
         /// </summary>
-        public StreamsGroupHeartbeatResponse WithAcceptableRecoveryLag(Int32 acceptableRecoveryLag)
+        public StreamsGroupHeartbeatResponse WithAcceptableRecoveryLagLegacy(Int32 acceptableRecoveryLagLegacy)
         {
-            AcceptableRecoveryLag = acceptableRecoveryLag;
+            AcceptableRecoveryLagLegacy = acceptableRecoveryLagLegacy;
             return this;
         }
 
@@ -292,6 +304,32 @@ namespace Kafka.Protocol
         public StreamsGroupHeartbeatResponse WithTaskOffsetIntervalMs(Int32 taskOffsetIntervalMs)
         {
             TaskOffsetIntervalMs = taskOffsetIntervalMs;
+            return this;
+        }
+
+        private Int64 _acceptableRecoveryLag = new Int64(-1);
+        /// <summary>
+        /// <para>The maximum acceptable lag (number of offsets to catch up) for a client to be considered caught-up enough to receive an active task assignment. A value of -1 indicates the broker does not support this configuration.</para>
+        /// <para>Versions: 1+</para>
+        /// <para>Default: -1</para>
+        /// </summary>
+        public Int64 AcceptableRecoveryLag
+        {
+            get => _acceptableRecoveryLag;
+            private set
+            {
+                _acceptableRecoveryLag = value;
+            }
+        }
+
+        /// <summary>
+        /// <para>The maximum acceptable lag (number of offsets to catch up) for a client to be considered caught-up enough to receive an active task assignment. A value of -1 indicates the broker does not support this configuration.</para>
+        /// <para>Versions: 1+</para>
+        /// <para>Default: -1</para>
+        /// </summary>
+        public StreamsGroupHeartbeatResponse WithAcceptableRecoveryLag(Int64 acceptableRecoveryLag)
+        {
+            AcceptableRecoveryLag = acceptableRecoveryLag;
             return this;
         }
 
@@ -397,6 +435,34 @@ namespace Kafka.Protocol
             return this;
         }
 
+        private Boolean _topologyDescriptionRequired = new Boolean(false);
+        /// <summary>
+        /// <para>True if the broker does not have an up-to-date topology description for this group. The client should send the topology description via StreamsGroupTopologyDescriptionUpdate.</para>
+        /// <para>Versions: 1+</para>
+        /// <para>Default: false</para>
+        /// </summary>
+        public Boolean TopologyDescriptionRequired
+        {
+            get => _topologyDescriptionRequired;
+            private set
+            {
+                if (Version >= 1 == false)
+                    throw new UnsupportedVersionException($"TopologyDescriptionRequired does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+                _topologyDescriptionRequired = value;
+            }
+        }
+
+        /// <summary>
+        /// <para>True if the broker does not have an up-to-date topology description for this group. The client should send the topology description via StreamsGroupTopologyDescriptionUpdate.</para>
+        /// <para>Versions: 1+</para>
+        /// <para>Default: false</para>
+        /// </summary>
+        public StreamsGroupHeartbeatResponse WithTopologyDescriptionRequired(Boolean topologyDescriptionRequired)
+        {
+            TopologyDescriptionRequired = topologyDescriptionRequired;
+            return this;
+        }
+
         private Int32 _endpointInformationEpoch = Int32.Default;
         /// <summary>
         /// <para>The endpoint epoch set in the response</para>
@@ -423,7 +489,7 @@ namespace Kafka.Protocol
 
         private NullableArray<EndpointToPartitions> _partitionsByUserEndpointCollection = new NullableArray<EndpointToPartitions>(null);
         /// <summary>
-        /// <para>Global assignment information used for IQ. Null if unchanged since last heartbeat.</para>
+        /// <para>Global assignment information used for IQ. There is one entry per member, so several entries carry the same UserEndpoint when a client runs more than one stream thread; clients must union the entries of an endpoint. Null if unchanged since last heartbeat.</para>
         /// <para>Versions: 0+</para>
         /// <para>Default: null</para>
         /// </summary>
@@ -437,7 +503,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>Global assignment information used for IQ. Null if unchanged since last heartbeat.</para>
+        /// <para>Global assignment information used for IQ. There is one entry per member, so several entries carry the same UserEndpoint when a client runs more than one stream thread; clients must union the entries of an endpoint. Null if unchanged since last heartbeat.</para>
         /// <para>Versions: 0+</para>
         /// <para>Default: null</para>
         /// </summary>
@@ -449,7 +515,7 @@ namespace Kafka.Protocol
 
         public delegate EndpointToPartitions CreateEndpointToPartitions(EndpointToPartitions field);
         /// <summary>
-        /// <para>Global assignment information used for IQ. Null if unchanged since last heartbeat.</para>
+        /// <para>Global assignment information used for IQ. There is one entry per member, so several entries carry the same UserEndpoint when a client runs more than one stream thread; clients must union the entries of an endpoint. Null if unchanged since last heartbeat.</para>
         /// <para>Versions: 0+</para>
         /// <para>Default: null</para>
         /// </summary>
@@ -537,7 +603,7 @@ namespace Kafka.Protocol
 
             private Array<TopicPartition> _activePartitionsCollection = Array.Empty<TopicPartition>();
             /// <summary>
-            /// <para>All topic partitions materialized by active tasks on the node</para>
+            /// <para>The source topic partitions, including repartition source topics, of the active tasks assigned to this member</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Array<TopicPartition> ActivePartitionsCollection
@@ -550,7 +616,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>All topic partitions materialized by active tasks on the node</para>
+            /// <para>The source topic partitions, including repartition source topics, of the active tasks assigned to this member</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public EndpointToPartitions WithActivePartitionsCollection(Array<TopicPartition> activePartitionsCollection)
@@ -561,7 +627,7 @@ namespace Kafka.Protocol
 
             private Array<TopicPartition> _standbyPartitionsCollection = Array.Empty<TopicPartition>();
             /// <summary>
-            /// <para>All topic partitions materialized by standby tasks on the node</para>
+            /// <para>The source topic partitions, including repartition source topics, of the standby and warm-up tasks assigned to this member</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Array<TopicPartition> StandbyPartitionsCollection
@@ -574,7 +640,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>All topic partitions materialized by standby tasks on the node</para>
+            /// <para>The source topic partitions, including repartition source topics, of the standby and warm-up tasks assigned to this member</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public EndpointToPartitions WithStandbyPartitionsCollection(Array<TopicPartition> standbyPartitionsCollection)

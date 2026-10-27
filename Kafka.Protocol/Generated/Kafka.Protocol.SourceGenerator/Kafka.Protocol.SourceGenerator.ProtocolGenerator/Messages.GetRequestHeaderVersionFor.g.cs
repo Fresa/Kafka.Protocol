@@ -174,12 +174,16 @@ namespace Kafka.Protocol
                 return new StreamsGroupDescribeRequest(version).HeaderVersion;
             if (StreamsGroupHeartbeatRequest.ApiKey == apiKey)
                 return new StreamsGroupHeartbeatRequest(version).HeaderVersion;
+            if (StreamsGroupTopologyDescriptionUpdateRequest.ApiKey == apiKey)
+                return new StreamsGroupTopologyDescriptionUpdateRequest(version).HeaderVersion;
             if (SyncGroupRequest.ApiKey == apiKey)
                 return new SyncGroupRequest(version).HeaderVersion;
             if (TxnOffsetCommitRequest.ApiKey == apiKey)
                 return new TxnOffsetCommitRequest(version).HeaderVersion;
             if (UnregisterBrokerRequest.ApiKey == apiKey)
                 return new UnregisterBrokerRequest(version).HeaderVersion;
+            if (UnregisterControllerRequest.ApiKey == apiKey)
+                return new UnregisterControllerRequest(version).HeaderVersion;
             if (UpdateFeaturesRequest.ApiKey == apiKey)
                 return new UpdateFeaturesRequest(version).HeaderVersion;
             if (UpdateRaftVoterRequest.ApiKey == apiKey)

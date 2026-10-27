@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public DeleteGroupsRequest(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"DeleteGroupsRequest does not support version {version}. Valid versions are: 0-2");
+                throw new UnsupportedVersionException($"DeleteGroupsRequest does not support version {version}. Valid versions are: 0-3");
             Version = version;
             IsFlexibleVersion = version >= 2;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(42);
         public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(2);
+        public static readonly Int16 MaxVersion = Int16.From(3);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 

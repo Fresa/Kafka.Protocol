@@ -174,12 +174,16 @@ namespace Kafka.Protocol
                 return await StreamsGroupDescribeResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (StreamsGroupHeartbeatResponse.ApiKey == apiKey)
                 return await StreamsGroupHeartbeatResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+            if (StreamsGroupTopologyDescriptionUpdateResponse.ApiKey == apiKey)
+                return await StreamsGroupTopologyDescriptionUpdateResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (SyncGroupResponse.ApiKey == apiKey)
                 return await SyncGroupResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (TxnOffsetCommitResponse.ApiKey == apiKey)
                 return await TxnOffsetCommitResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (UnregisterBrokerResponse.ApiKey == apiKey)
                 return await UnregisterBrokerResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+            if (UnregisterControllerResponse.ApiKey == apiKey)
+                return await UnregisterControllerResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (UpdateFeaturesResponse.ApiKey == apiKey)
                 return await UpdateFeaturesResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (UpdateRaftVoterResponse.ApiKey == apiKey)

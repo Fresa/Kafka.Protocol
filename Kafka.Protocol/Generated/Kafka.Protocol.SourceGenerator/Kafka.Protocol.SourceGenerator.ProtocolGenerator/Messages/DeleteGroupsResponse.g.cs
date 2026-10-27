@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public DeleteGroupsResponse(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"DeleteGroupsResponse does not support version {version}. Valid versions are: 0-2");
+                throw new UnsupportedVersionException($"DeleteGroupsResponse does not support version {version}. Valid versions are: 0-3");
             Version = version;
             IsFlexibleVersion = version >= 2;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(42);
         public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(2);
+        public static readonly Int16 MaxVersion = Int16.From(3);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -153,12 +153,14 @@ namespace Kafka.Protocol
             }
 
             int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
-            internal int GetSize(bool _) => _groupId.GetSize(IsFlexibleVersion) + _errorCode.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+            internal int GetSize(bool _) => _groupId.GetSize(IsFlexibleVersion) + _errorCode.GetSize(IsFlexibleVersion) + (Version >= 3 ? _errorMessage.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
             internal static async ValueTask<DeletableGroupResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
             {
                 var instance = new DeletableGroupResult(version);
                 instance.GroupId = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (instance.Version >= 3)
+                    instance.ErrorMessage = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 if (instance.IsFlexibleVersion)
                 {
                     var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
@@ -180,6 +182,8 @@ namespace Kafka.Protocol
             {
                 await _groupId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (Version >= 3)
+                    await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 if (IsFlexibleVersion)
                 {
                     await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
@@ -231,6 +235,34 @@ namespace Kafka.Protocol
             public DeletableGroupResult WithErrorCode(Int16 errorCode)
             {
                 ErrorCode = errorCode;
+                return this;
+            }
+
+            private NullableString _errorMessage = new NullableString(null);
+            /// <summary>
+            /// <para>The error message, or null if there was no error.</para>
+            /// <para>Versions: 3+</para>
+            /// <para>Default: null</para>
+            /// </summary>
+            public String? ErrorMessage
+            {
+                get => _errorMessage;
+                private set
+                {
+                    if (Version >= 3 == false && value == null)
+                        throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 3+");
+                    _errorMessage = value;
+                }
+            }
+
+            /// <summary>
+            /// <para>The error message, or null if there was no error.</para>
+            /// <para>Versions: 3+</para>
+            /// <para>Default: null</para>
+            /// </summary>
+            public DeletableGroupResult WithErrorMessage(String? errorMessage)
+            {
+                ErrorMessage = errorMessage;
                 return this;
             }
         }
