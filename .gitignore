@@ -22,6 +22,8 @@ x86/
 bld/
 [Bb]in/
 [Oo]bj/
+[Bb]in-linux/
+[Oo]bj-linux/
 [Ll]og/
 
 # Visual Studio 2015/2017 cache/options directory
