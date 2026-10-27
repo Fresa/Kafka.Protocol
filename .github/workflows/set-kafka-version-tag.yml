@@ -16,7 +16,7 @@ jobs:
       # Create tag
       contents: write
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v7
       - name: Read Kafka Release Version
         id: kafka-release-version
         shell: bash  
